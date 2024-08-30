@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>lab 1</title>
+    <link rel="stylesheet" href="../assets/styles/styles.css" />
+  </head>
+  <body>
+    <header id="header">
+      <div id="logo">
+        <img src="../assets/images/raccoon logo.webp" alt="raccoon logo" />
+      </div>
+      <div id="page-title">
+        <h1>Raccoonection</h1>
+      </div>
+      <div id="user-nav">
+        <nav>
+          <ul>
+            <li><a href="">Log in</a></li>
+            <li><a href="">Sign Up</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section id="navigation">
+        <nav>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li>
+              <a href="newConnection.html" class="active">New Connection</a>
+            </li>
+          </ul>
+        </nav>
+      </section>
+      <section class="content-wrapper">
+        <form action="" method="post">
+          <h2>Create a new connection</h2>
+          <div class="title">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" />
+          </div>
+          <div class="details">
+            <label for="details">Details</label>
+            <input type="text" name="details" id="details" />
+          </div>
+          <div class="when">
+            <label for="when">When</label>
+            <input type="date" name="when" id="when" />
+          </div>
+          <div class="where">
+            <label for="where">Where</label>
+            <input type="text" name="where" id="where" />
+          </div>
+          <div class="start">
+            <label for="start">Start</label>
+            <input type="time" name="start" id="start" />
+          </div>
+          <div class="end">
+            <label for="end">End</label>
+            <input type="time" name="end" id="end" />
+          </div>
+          <div class="image">
+            <label for="image">image</label>
+            <input type="file" name="image" id="image" />
+          </div>
+          <div class="create">
+            <input type="submit" value="Create Connection" />
+          </div>
+        </form>
+      </section>
+    </main>
+    <footer>
+      <div class="copyright">
+        <p>&copy; Raccoons of America</p>
+      </div>
+      <ul>
+        <li><a href="">Contact</a></li>
+        <li><a href="">About</a></li>
+      </ul>
+    </footer>
+  </body>
+</html>
