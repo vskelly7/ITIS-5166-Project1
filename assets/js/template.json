@@ -1,0 +1,20 @@
+{
+  "logo": {
+    "src": "../assets/img/raccoon-logo.webp",
+    "alt": "Racoon-Logo"
+  },
+  "nav": [
+    {
+      "label": "Home",
+      "ref": "index.html"
+    },
+    {
+      "label": "Event",
+      "ref": "events.html"
+    },
+    {
+      "label": "New Event",
+      "ref": "newEvent.html"
+    }
+  ]
+}
