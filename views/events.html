@@ -4,14 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>lab 1</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="../assets/css/styles.css" />
-    <script src="../assets/js/structure.js"></script>
     <script src="../assets/js/events.js"></script>
   </head>
   <body>
     <header id="header">
       <div id="logo-container">
-        <a id="logo" href="index.html"></a>
+        <a id="logo" href="index.html"
+          ><img src="../assets/img/logoWC.jpg" alt="Wanderers Club Logo"
+        /></a>
       </div>
       <div id="page-title">
         <h1>Wanderers Club</h1>
@@ -25,9 +33,46 @@
         </nav>
       </div>
     </header>
-    <nav id="navigation"></nav>
+    <nav id="navigation">
+      <ul>
+        <li>
+          <a href="index.html"> Home </a>
+        </li>
+        <li>
+          <a href="events.html" class="active"> Events </a>
+        </li>
+        <li>
+          <a href="newEvent.html"> New Event </a>
+        </li>
+      </ul>
+    </nav>
     <main>
-      <section class="content-wrapper"></section>
+      <section class="content-wrapper">
+        <div>
+          <h1>Educational</h1>
+          <ul>
+            <li>
+              <a href="event.html"
+                >LCES 2050 - Introduction to Linguistic Anthropology</a
+              >
+            </li>
+            <li>
+              <a href="event.html"
+                >ITIS 5166 - Network Based Application Development</a
+              >
+            </li>
+            <li>
+              <a href="event.html">MBAD 6122 - Decison Modeling and Analysis</a>
+            </li>
+          </ul>
+          <h1>Recreational</h1>
+          <ul>
+            <li><a href="event.html">Fun at Carowinds</a></li>
+            <li><a href="event.html">Local Brewery Crawl</a></li>
+            <li><a href="event.html">Farmers Market Meet Up</a></li>
+          </ul>
+        </div>
+      </section>
     </main>
     <footer>
       <div class="copyright">

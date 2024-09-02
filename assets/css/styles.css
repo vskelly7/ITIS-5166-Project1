@@ -60,7 +60,7 @@ img {
 }
 
 #user-nav li {
-  border-right: none;
+  border: 1px outset white;
 }
 
 #navigation {
@@ -83,6 +83,7 @@ ul {
 li {
   display: inline-block;
   border-right: 1px solid #bbb;
+  border-left: 1px solid #bbb;
   background-color: var(--primary);
 }
 

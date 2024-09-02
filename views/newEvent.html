@@ -4,13 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>lab 1</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+      integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="../assets/css/styles.css" />
-    <script src="../assets/js/structure.js"></script>
   </head>
   <body>
     <header id="header">
       <div id="logo-container">
-        <a id="logo" href="index.html"></a>
+        <a id="logo" href="index.html"
+          ><img src="../assets/img/logoWC.jpg" alt="Wanderers Club Logo"
+        /></a>
       </div>
       <div id="page-title">
         <h1>Wanderers Club</h1>
@@ -24,7 +32,19 @@
         </nav>
       </div>
     </header>
-    <nav id="navigation"></nav>
+    <nav id="navigation">
+      <ul>
+        <li>
+          <a href="index.html"> Home </a>
+        </li>
+        <li>
+          <a href="events.html"> Events </a>
+        </li>
+        <li>
+          <a href="newEvent.html" class="active"> New Event </a>
+        </li>
+      </ul>
+    </nav>
     <main>
       <section class="content-wrapper">
         <form action="#" method="post">
@@ -81,6 +101,9 @@
       <ul>
         <li><a href="">Contact</a></li>
         <li><a href="">About</a></li>
+        <li>
+          <a href=""><i class="fa-brands fa-facebook"></i></a>
+        </li>
       </ul>
     </footer>
   </body>
