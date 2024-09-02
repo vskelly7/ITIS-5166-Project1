@@ -1,14 +1,23 @@
+@media screen and (min-width: 800px) {
+  .images {
+    width: 30%;
+  }
+  .image {
+    width: 85%;
+  }
+}
+
 :root {
-  --accent: gold;
-  --base: lightgray;
-  --active: #111;
-  --primary: #333;
-  --secondary: gray;
+  --base: #d6f7ff;
+  --active: #2aaabf;
+  --primary: #0487a9;
+  --secondary: #2aaabf;
+  --tertiary: #abe0f6;
 }
 
 body {
   background-color: var(--base);
-  font-family: "Times New Roman", Times, serif;
+  font-family: Helvetica, sans-serif;
   padding: 0px;
   margin: 0px;
   text-align: center;
@@ -19,18 +28,24 @@ body {
 }
 
 header {
-  background-color: var(--secondary);
+  background-image: url("../img/dolphinheader.jpg");
   margin: 0;
-  border-bottom: 5px solid var(--accent);
+  border-bottom: 5px solid var(--secondary);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: end;
-  color: white;
+  color: black;
+  font-family: cursive;
+  font-style: oblique;
 }
 
 #logo-container {
   height: 80px;
+}
+
+#logo img {
+  mix-blend-mode: darken;
 }
 
 img {
@@ -40,40 +55,12 @@ img {
 
 #user-nav {
   height: 40%;
+  font-family: "Helvetica", sans-serif;
+  font-style: initial;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: var(--primary);
-}
-
-li {
-  float: left;
-  display: inline;
-  border-right: 1px solid #bbb;
-}
-
-#user-nav li:last-child {
+#user-nav li {
   border-right: none;
-}
-
-li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover {
-  background-color: var(--active);
-}
-
-main {
-  flex-grow: 1;
 }
 
 #navigation {
@@ -86,26 +73,57 @@ main {
   display: flex;
 }
 
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+li {
+  display: inline-block;
+  border-right: 1px solid #bbb;
+  background-color: var(--primary);
+}
+
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: var(--active);
+  color: white;
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+}
+
 .active {
   background-color: var(--active);
+  color: white;
 }
 
 .content-wrapper {
   width: 87%;
-  margin: auto auto;
+  margin: 1rem auto;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-content: space-around;
+  align-items: center;
+  column-gap: 30px;
 }
 
-.images {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin: 30px auto;
-  width: 100%;
-  flex: 1 1 100%;
+.content-wrapper li {
+  background-color: var(--tertiary);
+}
+
+.words {
+  font-size: 80%;
 }
 
 footer {
@@ -113,7 +131,10 @@ footer {
   display: flex;
   justify-content: space-between;
   padding: 0 10px;
-  color: white;
+}
+
+form {
+  width: 100%;
 }
 
 form div {
@@ -136,19 +157,21 @@ textarea {
   width: 60%;
   border: 2px solid;
   padding: 5px 10px;
-  transition: all 0.7 ease-in-out;
   border-radius: 3px;
 }
 
 input[type="submit"] {
-  background-color: var(--accent);
+  background-color: var(--secondary);
   border: 2px solid var(--primary);
   border-radius: 5px;
   padding: 5px;
+  font-weight: bold;
+  font-size: large;
 }
 
 input:hover,
-textarea:hover {
+textarea:hover,
+select:hover {
   transform: scale(1.05);
 }
 
@@ -159,5 +182,25 @@ input[type="submit"]:hover {
 input:focus,
 textarea:focus,
 select:focus {
-  border: 2px solid var(--accent);
+  border: 2px solid var(--secondary);
+}
+
+.event {
+  display: grid;
+  gap: 5%;
+  grid-template-areas: "title title" "image info";
+  margin: 20px;
+  text-align: left;
+}
+
+.event > .title {
+  grid-area: title;
+}
+
+.event > .image {
+  grid-area: image;
+}
+
+.event > .info {
+  grid-area: info;
 }

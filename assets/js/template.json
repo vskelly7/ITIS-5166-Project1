@@ -1,6 +1,6 @@
 {
   "logo": {
-    "src": "../assets/img/raccoon-logo.webp",
+    "src": "../assets/img/logoWC.jpg",
     "alt": "Racoon-Logo"
   },
   "nav": [
@@ -9,7 +9,7 @@
       "ref": "index.html"
     },
     {
-      "label": "Event",
+      "label": "Events",
       "ref": "events.html"
     },
     {
