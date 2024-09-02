@@ -1,0 +1,163 @@
+:root {
+  --accent: gold;
+  --base: lightgray;
+  --active: #111;
+  --primary: #333;
+  --secondary: gray;
+}
+
+body {
+  background-color: var(--base);
+  font-family: "Times New Roman", Times, serif;
+  padding: 0px;
+  margin: 0px;
+  text-align: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  background-color: var(--secondary);
+  margin: 0;
+  border-bottom: 5px solid var(--accent);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+  color: white;
+}
+
+#logo-container {
+  height: 80px;
+}
+
+img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+#user-nav {
+  height: 40%;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--primary);
+}
+
+li {
+  float: left;
+  display: inline;
+  border-right: 1px solid #bbb;
+}
+
+#user-nav li:last-child {
+  border-right: none;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: var(--active);
+}
+
+main {
+  flex-grow: 1;
+}
+
+#navigation {
+  background-color: var(--primary);
+  position: sticky;
+  top: 0;
+}
+
+#navigation ul {
+  display: flex;
+}
+
+.active {
+  background-color: var(--active);
+}
+
+.content-wrapper {
+  width: 87%;
+  margin: auto auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: space-around;
+}
+
+.images {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 30px auto;
+  width: 100%;
+  flex: 1 1 100%;
+}
+
+footer {
+  background-color: var(--primary);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  color: white;
+}
+
+form div {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+label {
+  width: 20%;
+  float: left;
+  font-weight: bold;
+  font-style: oblique;
+  font-size: larger;
+}
+
+input,
+select,
+textarea {
+  width: 60%;
+  border: 2px solid;
+  padding: 5px 10px;
+  transition: all 0.7 ease-in-out;
+  border-radius: 3px;
+}
+
+input[type="submit"] {
+  background-color: var(--accent);
+  border: 2px solid var(--primary);
+  border-radius: 5px;
+  padding: 5px;
+}
+
+input:hover,
+textarea:hover {
+  transform: scale(1.05);
+}
+
+input[type="submit"]:hover {
+  transform: scale(1.1);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border: 2px solid var(--accent);
+}
