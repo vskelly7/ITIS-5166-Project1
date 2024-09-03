@@ -83,7 +83,6 @@ ul {
 li {
   display: inline-block;
   border-right: 1px solid #bbb;
-  border-left: 1px solid #bbb;
   background-color: var(--primary);
 }
 
@@ -196,6 +195,13 @@ select:focus {
 
 .event > .title {
   grid-area: title;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.event h1 {
+  max-width: fit-content;
 }
 
 .event > .image {
@@ -204,4 +210,12 @@ select:focus {
 
 .event > .info {
   grid-area: info;
+}
+
+.red {
+  color: red;
+}
+
+.green {
+  color: green;
 }
