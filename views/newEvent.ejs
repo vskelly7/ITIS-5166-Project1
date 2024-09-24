@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Project 1</title>
+		[%- include('partials/head') %]
+	</head>
+	<body>
+		<header id="header">[%- include('partials/header') %]</header>
+		<nav id="navigation">[%- include('partials/navigation') %]</nav>
+		<main>
+			<section class="content-wrapper">
+				<form action="#" method="post">
+					<h2>Create a New Event</h2>
+					<div class="category">
+						<label for="category">Category</label>
+						<select name="category" id="category" required>
+							<option value="" disabled selected>-- Select an option --</option>
+							<option value="recreational">Recreational</option>
+							<option value="educational">Educational</option>
+							<option value="undergraduate">Undergraduate</option>
+							<option value="graduate">Graduate</option>
+							<option value="other">Other</option>
+						</select>
+					</div>
+					<div class="title">
+						<label for="title">Title</label>
+						<input type="text" id="title" name="title" required />
+					</div>
+					<div class="host">
+						<label for="host">Host</label>
+						<input type="text" name="host" id="host" />
+					</div>
+					<div class="where">
+						<label for="where">Where</label>
+						<input type="text" name="where" id="where" required />
+					</div>
+					<div class="start">
+						<label for="start">Start</label>
+						<input type="datetime-local" name="start" id="start" required />
+					</div>
+					<div class="end">
+						<label for="end">End</label>
+						<input type="datetime-local" name="end" id="end" required />
+					</div>
+					<div class="details">
+						<label for="details">Details</label>
+						<textarea name="details" rows="3" id="details" required></textarea>
+					</div>
+					<div class="image">
+						<label for="image">Image</label>
+						<input type="file" name="image" id="image" required />
+					</div>
+					<div class="create">
+						<input type="submit" value="Create Connection" />
+					</div>
+				</form>
+			</section>
+		</main>
+		<footer>[%- include('partials/footer') %]</footer>
+	</body>
+</html>

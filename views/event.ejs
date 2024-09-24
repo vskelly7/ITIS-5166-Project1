@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Project 1</title>
+		[%- include('partials/head') %]
+	</head>
+	<body>
+		<header id="header">[%- include('partials/header') %]</header>
+		<nav id="navigation">[%- include('partials/navigation') %]</nav>
+		<main>
+			<section class="content-wrapper">
+				<div class="event">
+					<div class="title">
+						<h2>Local Brewery Crawl</h2>
+						<div class="edit">
+							<span>
+								<a href=""
+									><i
+										class="fa-regular fa-pen-to-square fa-border fa-lg green"
+									></i
+								></a>
+							</span>
+							<span>
+								<a href=""
+									><i class="fa-solid fa-trash-alt fa-border fa-lg red"></i
+								></a>
+							</span>
+						</div>
+					</div>
+
+					<div class="image">
+						<img src="/img/brewery.jpg" alt="Man in brewery" />
+					</div>
+					<div class="info">
+						<!-- host name, start and end date/time, and location-->
+						<div id="host">
+							<p><b>Host: </b>Vanessa Kelly</p>
+							<p><b>Date and Time: </b>Friday, Sep. 27 7:00PM - 11:00PM</p>
+							<p>
+								<b>Location: </b>1440 S Tryon St UNIT 110, Charlotte, NC 28203
+							</p>
+							<p>
+								<b>Details: </b>We will meet at the Wooden Ropbot and continue
+								to Sycamore Brewery and Monday Night Brewing from there. All
+								brewery stops are within walking distance.
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer>[%- include('partials/footer') %]</footer>
+	</body>
+</html>
