@@ -1,0 +1,23 @@
+<ul>
+	<li>
+		[% if (title === 'home') { %]
+		<a href="/" class="active"> Home </a>
+		[% } else { %]
+		<a href="/"> Home </a>
+		[% } %]
+	</li>
+	<li>
+		[% if (title === 'events') { %]
+		<a href="/events" class="active"> Events </a>
+		[% } else { %]
+		<a href="/events"> Events </a>
+		[% } %]
+	</li>
+	<li>
+		[% if (title === 'new event') { %]
+		<a href="/events/create" class="active"> New Event </a>
+		[% } else { %]
+		<a href="/events/create"> New Event </a>
+		[% } %]
+	</li>
+</ul>
