@@ -1,42 +1,41 @@
+// handles all requests associated with events. This module should include all 7 RESTful routes.
+
 const express = require("express");
+const controller = require('../controllers/eventController');
 
 const router = express.Router();
 
-//GET /events: send all events to the user
+//GET /events: displays all events to the user
 
 router.get("/", (req, res) => {
-	res.render("events", { title: "events" });
+	res.render("events/index.ejs", { title: "events" });
 });
 
 //GET /events/new: send html form for creating new event
 
 router.get("/new", (req, res) => {
-	res.render("newEvent", { title: "new event" });
+    res.render("events/newEvent", { title: "new event" });
 });
 
-//POST /events:create a new event
+//POST /events: create a new event
 /* TODO : 
-  create form 
-  link
+  create form link
 */
-router.post("/", (req, res) => {
-	res.send("created a new event");
-});
+// router.post("/", (req, res) => {
+//  	res.send("Created a new event");
+// });
+
 
 //GET /events/:id: send details of event identified by id
 
-router.get("/:id", (req, res) => {
-	res.render("event", { title: "event" });
-});
+router.get('/:id', controller.show);
 
 //GET /events/:id/edit: send the html form for editing an existing event
 /* TODO : 
   create form and populate with existing information
   link after
 */
-router.get("/:id/edit", (req, res) => {
-	res.send("send the edit form");
-});
+router.get('/:id', controller.show);
 
 //PUT /events/:id: update the event identified by id
 /* TODO :
