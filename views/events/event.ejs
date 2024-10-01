@@ -5,18 +5,17 @@
 		[%- include('../partials/head') %]
 	</head>
 	<body>
-		[%- include('../partials/header') %]
-		[%- include('../partials/navigation') %]
+		[%- include('../partials/header') %] [%- include('../partials/navigation')
+		%]
 		<main>
 			<section class="content-wrapper">
 				<div class="event">
 					<div class="title">
 						<h2>[%= event.title%]</h2>
-					</div>
 
-					<div class="edit">
+						<div class="edit">
 							<span>
-								<a href=""
+								<a href="/events/[%= event.id %]/edit"
 									><i
 										class="fa-regular fa-pen-to-square fa-border fa-lg green"
 									></i
@@ -32,15 +31,15 @@
 
 					<div class="image">
 						<!--img src="/img/brewery.jpg" alt="Man in brewery" /-->
-						[% if(event.image) {%]
-								<img src=[%= event.image %] alt="" srcset="">
+						[% if(event.image){ %]
+						<img src="[%=event.image%]" alt="" srcset="" />
 						[% } %]
 					</div>
 					<div class="info">
-							<p><b>Host: </b>[%= event.hostName%]</p>
-							<p><b>Start Date and Time: </b>[%= event.start%]</p>
-							<p><b>End Date and Time: </b>[%= event.end%]</p>
-							<p><b>Details: </b>[%= event.details%]</p>
+						<p><b>Host: </b>[%= event.hostName%]</p>
+						<p><b>Start Date and Time: </b>[%= event.start%]</p>
+						<p><b>End Date and Time: </b>[%= event.end%]</p>
+						<p><b>Details: </b>[%= event.details%]</p>
 					</div>
 				</div>
 			</section>
