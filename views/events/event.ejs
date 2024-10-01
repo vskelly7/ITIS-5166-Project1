@@ -12,9 +12,9 @@
 				<div class="event">
 					<div class="title">
 						<h2>[%= event.title%]</h2>
-						</div>
+					</div>
 
-						<div class="edit">
+					<div class="edit">
 							<span>
 								<a href=""
 									><i
@@ -32,15 +32,15 @@
 
 					<div class="image">
 						<!--img src="/img/brewery.jpg" alt="Man in brewery" /-->
+						[% if(event.image) {%]
+								<img src=[%= event.image %] alt="" srcset="">
+						[% } %]
 					</div>
 					<div class="info">
-						<!-- host name, start and end date/time, and location-->
-						<div id="host">
 							<p><b>Host: </b>[%= event.hostName%]</p>
 							<p><b>Start Date and Time: </b>[%= event.start%]</p>
 							<p><b>End Date and Time: </b>[%= event.end%]</p>
-								<b>Details: </b>[%= event.details%]</p>
-						</div>
+							<p><b>Details: </b>[%= event.details%]</p>
 					</div>
 				</div>
 			</section>
