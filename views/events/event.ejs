@@ -2,16 +2,19 @@
 <html lang="en">
 	<head>
 		<title>Project 1</title>
-		[%- include('partials/head') %]
+		<%- include('../partials/head') %>
 	</head>
 	<body>
-		[%- include('partials/header') %]
-		[%- include('partials/navigation') %]
+		<%- include('../partials/header') %>
+		<%- include('../partials/navigation') %>
 		<main>
 			<section class="content-wrapper">
 				<div class="event">
 					<div class="title">
-						<h2>Local Brewery Crawl</h2>
+						<label for="title"><%= event.eventTitle%></label>
+						<input type="text" id="title" name="title" required />
+						</div>
+
 						<div class="edit">
 							<span>
 								<a href=""
@@ -29,26 +32,20 @@
 					</div>
 
 					<div class="image">
-						<img src="/img/brewery.jpg" alt="Man in brewery" />
+						<!--img src="/img/brewery.jpg" alt="Man in brewery" /-->
 					</div>
 					<div class="info">
 						<!-- host name, start and end date/time, and location-->
 						<div id="host">
-							<p><b>Host: </b>Vanessa Kelly</p>
-							<p><b>Date and Time: </b>Friday, Sep. 27 7:00PM - 11:00PM</p>
-							<p>
-								<b>Location: </b>1440 S Tryon St UNIT 110, Charlotte, NC 28203
-							</p>
-							<p>
-								<b>Details: </b>We will meet at the Wooden Ropbot and continue
-								to Sycamore Brewery and Monday Night Brewing from there. All
-								brewery stops are within walking distance.
-							</p>
+							<p><b>Host: </b><%= event.hostName%></p>
+							<p><b>Start Date and Time: </b><%= event.end%></p>
+							<p><b>End Date and Time: </b><%= event.start%></p>
+								<b>Details: </b><%= event.details%></p>
 						</div>
 					</div>
 				</div>
 			</section>
 		</main>
-		[%- include('partials/footer') %]
+		<%- include('../partials/footer') %>
 	</body>
 </html>
