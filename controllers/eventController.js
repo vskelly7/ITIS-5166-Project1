@@ -3,43 +3,62 @@ const model = require("../models/event");
 // GET /events : displays all events to the user
 exports.index = (req, res) => {
 	let events = model.find();
-	res.render("./events/index.ejs", { events });
+	res.render("./events/index.ejs", { events, title: "event" });
 };
 
-// GET /stories/new : send HTML form for creating a new story
+// GET /events/new : send HTML form for creating a new event
 exports.new = (req, res) => {
-	res.send("send the new form");
+	res.render("./events/newEvent", { title: "new event" });
 };
 
 // POSSIBLY MAIN
 
-// POST /stories : create a new stories
+// POST /events : create a new events
+/* TODO : 
+  create form link to database
+	might need to clean form information
+	if form valid add entry
+*/
 exports.create = (req, res) => {
-	res.send("Created a new story");
+	res.send(req.body);
 };
 
-// GET /stories/:id : send details of event identified by ID
+// GET /events/:id : send details of event identified by ID
 exports.show = (req, res) => {
 	let id = req.params.id;
 	let event = model.findById(id);
 	if (event) {
 		res.render("./events/event.ejs", { event, title: "event" });
 	} else {
-		res.status(404).send("Cannot find story with id " + id);
+		res.status(404).send("Cannot find event with id " + id);
 	}
 };
 
-// GET /stories/:id/edit : send html form for editing existing story
+// GET /events/:id/edit : send html form for editing existing event
+/* TODO : 
+  populate form with existing information
+  put to /events/:id
+*/
 exports.edit = (req, res) => {
 	res.send("send the edit form");
 };
 
-// PUT /stories/:id : update the story identified by id
+// PUT /events/:id : update the event identified by id
+/* TODO :
+  Update event with matching id in database
+	reroute somewhere
+		- probably /events
+*/
 exports.update = (req, res) => {
-	res.send("update story with id " + req.params.id);
+	res.send("update event with id " + req.params.id);
 };
 
-// DELETE /stories/:id : deletes the story identified by id
+// DELETE /events/:id : deletes the event identified by id
+/* TODO :
+  remove event from DB
+	probably want to put a confirmation somewhere
+		- Could make a confirmation pop up on button click inside of event
+*/
 exports.delete = (req, res) => {
-	res.send("delete story with id " + req.params.id);
+	res.send("delete event with id " + req.params.id);
 };
