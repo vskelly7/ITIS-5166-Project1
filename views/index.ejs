@@ -1,41 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>Project 1</title>
-		[%- include('partials/head') %]
-	</head>
-	<body>
-		[%- include('partials/header') %]
-		[%- include('partials/navigation') %]
-		<main>
-			<section class="content-wrapper">
-				<div class="words">
-					<div class="welcome">
-						<h2>Welcome to UNCC's Wanderers Club</h2>
-						<h3>The one-stop-shop for adventures for students</h3>
-					</div>
-					<div class="details">
-						<p>
-							Our aim is to enrich your student experience, no matter your
-							origin or interests, by connecting you to unique student
-							opportunities
-						</p>
-						<p>
-							<b> Our events have something for everyone. </b>
-						</p>
-						<p>
-							Let us connect you with the recreational, educational or travel
-							experiences you are looking for
-						</p>
-					</div>
-				</div>
-				<div class="images">
-					<div>
-						<img src="/img/student.webp" alt="Students on an outing" />
-					</div>
-				</div>
-			</section>
-		</main>
-		[%- include('partials/footer') %]
-	</body>
-</html>
+[%- include('partials/before') %]
+<div class="words">
+	<div class="welcome">
+		<h2>Welcome to UNCC's Wanderers Club</h2>
+		<h3>The one-stop-shop for adventures for students</h3>
+	</div>
+	<div class="details">
+		<p>
+			Our aim is to enrich your student experience, no matter your origin or
+			interests, by connecting you to unique student opportunities
+		</p>
+		<p>
+			<b> Our events have something for everyone. </b>
+		</p>
+		<p>
+			Let us connect you with the recreational, educational or travel
+			experiences you are looking for
+		</p>
+	</div>
+</div>
+<div class="images">
+	<div>
+		<img src="/img/student.webp" alt="Students on an outing" />
+	</div>
+</div>
+[%- include('partials/after') %]

@@ -1,49 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>Project 1</title>
-		[%- include('../partials/head') %]
-	</head>
-	<body>
-		[%- include('../partials/header') %] [%- include('../partials/navigation')
-		%]
-		<main>
-			<section class="content-wrapper">
-				<div class="event">
-					<div class="title">
-						<h2>[%= event.title%]</h2>
+[%- include('../partials/before') %]
+<div class="event">
+	<div class="title">
+		<h2>[%= event.title%]</h2>
 
-						<div class="edit">
-							<span>
-								<a href="/events/[%= event.id %]/edit"
-									><i
-										class="fa-regular fa-pen-to-square fa-border fa-lg green"
-									></i
-								></a>
-							</span>
-							<span>
-								<a href=""
-									><i class="fa-solid fa-trash-alt fa-border fa-lg red"></i
-								></a>
-							</span>
-						</div>
-					</div>
+		<div class="edit">
+			<span>
+				<a href="/events/[%= event.id %]/edit"
+					><i class="fa-regular fa-pen-to-square fa-border fa-lg green"></i
+				></a>
+			</span>
+			<span>
+				<a href=""><i class="fa-solid fa-trash-alt fa-border fa-lg red"></i></a>
+			</span>
+		</div>
+	</div>
 
-					<div class="image">
-						<!--img src="/img/brewery.jpg" alt="Man in brewery" /-->
-						[% if(event.image){ %]
-						<img src="[%=event.image%]" alt="" srcset="" />
-						[% } %]
-					</div>
-					<div class="info">
-						<p><b>Host: </b>[%= event.hostName%]</p>
-						<p><b>Start Date and Time: </b>[%= event.start%]</p>
-						<p><b>End Date and Time: </b>[%= event.end%]</p>
-						<p><b>Details: </b>[%= event.details%]</p>
-					</div>
-				</div>
-			</section>
-		</main>
-		[%- include('../partials/footer') %]
-	</body>
-</html>
+	<div class="image">
+		<!--img src="/img/brewery.jpg" alt="Man in brewery" /-->
+		[% if(event.image){ %]
+		<img src="[%=event.image%]" alt="" srcset="" />
+		[% } %]
+	</div>
+	<div class="info">
+		<p><b>Host: </b>[%= event.hostName%]</p>
+		<p><b>Start Date and Time: </b>[%= event.start%]</p>
+		<p><b>End Date and Time: </b>[%= event.end%]</p>
+		<p><b>Details: </b>[%= event.details%]</p>
+	</div>
+</div>
+[%- include('../partials/after') %]
