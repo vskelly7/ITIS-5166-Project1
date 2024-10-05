@@ -24,13 +24,15 @@ exports.create = (req, res) => {
 };
 
 // GET /events/:id : send details of event identified by ID
-exports.show = (req, res) => {
+exports.show = (req, res, next) => {
 	let id = req.params.id;
 	let event = model.findById(id);
 	if (event) {
 		res.render("./events/event.ejs", { event, title: "event" });
 	} else {
-		res.status(404).send("Cannot find event with id " + id);
+		let err = new Error('Cannot find a event with id ' + id)
+		err.status = 404
+		next(err)
 	}
 };
 
