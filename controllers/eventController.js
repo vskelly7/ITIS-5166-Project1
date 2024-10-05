@@ -3,7 +3,7 @@ const model = require("../models/event");
 // GET /events : displays all events to the user
 exports.index = (req, res) => {
 	let events = model.find();
-	res.render("./events/index.ejs", { events, title: "events" });
+	res.render("./events/index", { events, title: "events" });
 };
 
 // GET /events/new : send HTML form for creating a new event

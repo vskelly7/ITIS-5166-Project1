@@ -1,26 +1,20 @@
 [%- include('../partials/before') %]
-				<div>
-					<h2>Educational</h2>
-					<ul>
-						<li>
-							<a href="/events/1"
-								>LCES 2050 - Introduction to Linguistic Anthropology</a
-							>
-						</li>
-						<li>
-							<a href="/events/2"
-								>ITIS 5166 - Network Based Application Development</a
-							>
-						</li>
-						<li>
-							<a href="/events/3">MBAD 6122 - Decison Modeling and Analysis</a>
-						</li>
-					</ul>
-					<h2>Recreational</h2>
-					<ul>
-						<li><a href="/events/4">Fun at Carowinds</a></li>
-						<li><a href="/events/5">Local Brewery Crawl</a></li>
-						<li><a href="/events/6">Farmers Market Meet Up</a></li>
-					</ul>
-				</div>
+<div>
+	[%
+	const categories = ['Educational', 'Recreational']
+	for (category of categories) {
+		let list = events.filter(event => event.category === category)
+	%]
+		<h1>[%= category %]</h1>
+		<ul>
+		[%
+		for (event of list) {
+		%]
+			<li>
+				<a href="events/[%= event.id %]">[%= event.title%]</a>
+			</li>
+		[% } %]
+		</ul>
+	[% } %]
+</div>
 [%- include('../partials/after') %]
