@@ -21,6 +21,25 @@ app.get("/", (req, res) => {
 
 app.use("/events", eventRoutes);
 
+// 404
+app.use((req, res, next) => {
+	let err = new Error('The server cannot locate ' + req.url)
+	err.status = 404
+	next(err)
+})
+
+// error handler
+app.use((err, req, res, next) => { // should be below all other middleware
+	console.log(err.stack)
+	if (!err.status) {
+		err.status = 500;
+		err.message = 'Internal server error';
+	}
+
+	res.status(err.status)
+	res.render('error', {error: err, title: 'error'})
+})
+
 app.listen(port, host, () => {
 	console.log("The server is running at port", port);
 });
