@@ -1,14 +1,14 @@
 [%- include('../partials/before') %]
-<form action="#" method="post">
+<form action="/events" method="post">
 	<h2>Create a New Event</h2>
 	<div class="category">
 		<label for="category">Category</label>
 		<select name="category" id="category" required>
 			<option value="" disabled selected>-- Select an option --</option>
-			<option value="recreational">Recreational</option>
-			<option value="educational">Educational</option>
-			<option value="undergraduate">Undergraduate</option>
-			<option value="graduate">Graduate</option>
+			<option value="Recreational">Recreational</option>
+			<option value="Educational">Educational</option>
+			<option value="Undergraduate">Undergraduate</option>
+			<option value="Graduate">Graduate</option>
 			<option value="other">Other</option>
 		</select>
 	</div>
@@ -38,7 +38,7 @@
 	</div>
 	<div class="image">
 		<label for="image">Image</label>
-		<input type="file" name="image" id="image" required />
+		<input type="file" name="image" id="image"  />
 	</div>
 	<div class="create">
 		<input type="submit" value="Create Connection" />

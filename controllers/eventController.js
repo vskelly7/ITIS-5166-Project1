@@ -20,7 +20,10 @@ exports.new = (req, res) => {
 	if form valid add entry
 */
 exports.create = (req, res) => {
-	res.send(req.body);
+		// res.send("created a new event");
+		let event = req.body;
+		model.save(event);
+		res.redirect("/events");
 };
 
 // GET /events/:id : send details of event identified by ID

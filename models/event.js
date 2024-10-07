@@ -1,12 +1,13 @@
 // I think we need to install luxon to activate the date/time below
 const { DateTime } = require("luxon");
+const { v4: uuidv4 } = require("uuid");
 
 const events = [
 	{
 		id: "1",
 		category: "Educational",
 		title: "LCES 2050 - Introduction to Linguistic Anthropology",
-		hostName: "Vanessa Kelly",
+		host: "Vanessa Kelly",
 		start: DateTime.local(2024, 11, 15, 14, 0).toLocaleString(
 			DateTime.DATETIME_SHORT
 		),
@@ -20,7 +21,7 @@ const events = [
 		id: "2",
 		category: "Educational",
 		title: "ITIS 5166 - Network Based Application Development",
-		hostName: "Jonathan Smith",
+		host: "Jonathan Smith",
 		start: DateTime.local(2024, 10, 30, 13, 0).toLocaleString(
 			DateTime.DATETIME_SHORT
 		),
@@ -35,7 +36,7 @@ const events = [
 		id: "3",
 		category: "Educational",
 		title: "MBAD 6122 - Decision Modeling and Analysis",
-		hostName: "Vanessa Kelly",
+		host: "Vanessa Kelly",
 		start: DateTime.local(2024, 11, 3, 9, 0).toLocaleString(
 			DateTime.DATETIME_SHORT
 		),
@@ -50,7 +51,7 @@ const events = [
 		id: "4",
 		category: "Recreational",
 		title: "Fun at Carowinds",
-		hostName: "Jonathan Smith",
+		host: "Jonathan Smith",
 		start: DateTime.local(2024, 10, 31, 19, 0).toLocaleString(
 			DateTime.DATETIME_SHORT
 		),
@@ -65,7 +66,7 @@ const events = [
 		id: "5",
 		category: "Recreational",
 		title: "Local Brewery Crawl",
-		hostName: "Vanessa Kelly",
+		host: "Vanessa Kelly",
 		start: DateTime.local(2024, 11, 12, 14, 0).toLocaleString(
 			DateTime.DATETIME_SHORT
 		),
@@ -79,7 +80,7 @@ const events = [
 		id: "6",
 		category: "Recreational",
 		title: "Farmers Market Meet Up",
-		hostName: "Jonathan Smith",
+		host: "Jonathan Smith",
 		start: DateTime.local(2024, 11, 20, 9, 0).toLocaleString(
 			DateTime.DATETIME_SHORT
 		),
@@ -98,4 +99,12 @@ exports.find = function () {
 
 exports.findById = function (id) {
 	return events.find((event) => event.id === id);
+};
+
+exports.save = (event) => {
+	event.id = uuidv4();
+	event.start = DateTime.fromISO(event.start).toLocaleString(DateTime.DATETIME_SHORT);
+	event.end = DateTime.fromISO(event.end).toLocaleString(DateTime.DATETIME_SHORT);
+	events.push(event);
+	console.log(events);
 };
