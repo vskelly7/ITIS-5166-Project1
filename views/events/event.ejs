@@ -3,26 +3,26 @@
 	<div class="title">
 		<h2>[%= event.title%]</h2>
 
-		<div class="edit">
+		<div class="modify">
 			<span>
 				<a href="/events/[%= event.id %]/edit"
 					><i class="fa-regular fa-pen-to-square fa-border fa-lg green"></i
 				></a>
 			</span>
 			<span>
-				<a href=""><i class="fa-solid fa-trash-alt fa-border fa-lg red"></i></a>
+				<a href="/events/[%= event.id %]/delete"><i class="fa-solid fa-trash-alt fa-border fa-lg red"></i></a>
 			</span>
 		</div>
 	</div>
 
 	<div class="image">
+		[% if(event.image && event.image.length > 0){ %]
 		<!--img src="/img/brewery.jpg" alt="Man in brewery" /-->
-		[% if(event.image){ %]
 		<img src="[%=event.image%]" alt="" srcset="" />
 		[% } %]
 	</div>
 	<div class="info">
-		<p><b>Host: </b>[%= event.hostName%]</p>
+		<p><b>Host: </b>[%= event.host%]</p>
 		<p><b>Start Date and Time: </b>[%= event.start%]</p>
 		<p><b>End Date and Time: </b>[%= event.end%]</p>
 		<p><b>Details: </b>[%= event.details%]</p>
