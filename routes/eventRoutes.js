@@ -3,6 +3,8 @@
 const express = require("express");
 const controller = require("../controllers/eventController");
 
+const { fileUpload } = require("../middleware/fileUpload");
+
 const router = express.Router();
 
 //GET /events: displays all events to the user
@@ -12,7 +14,7 @@ router.get("/", controller.index);
 router.get("/new", controller.new);
 
 //POST /events: create a new event
-router.post("/", controller.create);
+router.post("/", fileUpload, controller.create);
 
 //GET /events/:id: send details of event identified by id
 router.get("/:id", controller.show);

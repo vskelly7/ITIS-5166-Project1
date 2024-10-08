@@ -18,7 +18,7 @@
 	<div class="image">
 		[% if(event.image && event.image.length > 0){ %]
 		<!--img src="/img/brewery.jpg" alt="Man in brewery" /-->
-		<img src="[%=event.image%]" alt="" srcset="" />
+		<img src="[%= typeof event.image !== 'undefined'? event.image: ''%]" alt="" srcset="" />
 		[% } %]
 	</div>
 	<div class="info">

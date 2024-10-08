@@ -21,7 +21,8 @@ exports.new = (req, res) => {
 */
 exports.create = (req, res) => {
 		// res.send("created a new event");
-		let event = req.body;
+	let event = req.body;
+	event.image = '/img/' + req.file.filename;
 		model.save(event);
 		res.redirect("/events");
 };
