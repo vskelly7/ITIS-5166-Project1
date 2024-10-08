@@ -192,7 +192,7 @@ select:focus {
   margin: 20px;
   text-align: left;
   width: 100%;
-  grid-auto-columns: min-content auto;
+  grid-auto-columns: auto 1fr;
 }
 
 .event > .title {

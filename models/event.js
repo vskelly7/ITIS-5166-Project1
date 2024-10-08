@@ -107,5 +107,5 @@ exports.save = (event) => {
 	event.start = DateTime.fromISO(event.start).toLocaleString(DateTime.DATETIME_SHORT);
 	event.end = DateTime.fromISO(event.end).toLocaleString(DateTime.DATETIME_SHORT);
 	events.push(event);
-	console.log(events);
+	console.log(event);
 };
