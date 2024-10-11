@@ -1,17 +1,19 @@
 [%- include('../partials/before') %]
+
 <div class="event">
 	<div class="title">
 		<h2>[%= event.title%]</h2>
 
 		<div class="modify">
-			<span>
-				<a href="/events/[%= event.id %]/edit"
-					><i class="fa-regular fa-pen-to-square fa-border fa-lg green"></i
-				></a>
-			</span>
-			<span>
-				<a href="/events/[%= event.id %]/delete"><i class="fa-solid fa-trash-alt fa-border fa-lg red"></i></a>
-			</span>
+			<form>
+				<button type = "submit" formmethod = "GET" formaction = "/events/[%= event.id %]/edit"><i class="fa-regular fa-pen-to-square fa-border fa-xl green"></i></button>
+			</form>
+		</div>
+			
+		<div class="remove">
+			<form>
+				<button type = "submit" formmethod = "POST" formaction = "/events/[%= event.id %]?_method=DELETE"><i class="fa-solid fa-trash-alt fa-border fa-xl red"></i></button>
+			</form>
 		</div>
 	</div>
 

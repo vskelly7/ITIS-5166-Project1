@@ -1,4 +1,3 @@
-// I think we need to install luxon to activate the date/time below
 const { DateTime } = require("luxon");
 const { v4: uuidv4 } = require("uuid");
 
@@ -108,4 +107,25 @@ exports.save = (event) => {
 	event.end = DateTime.fromISO(event.end).toLocaleString(DateTime.DATETIME_SHORT);
 	events.push(event);
 	console.log(event);
+};
+
+exports.updateByID = function(id, newEvent) {
+	let event = events.find(event => event.id === id);
+	if(event) {
+		event.title = newEvent.title;
+		event.details = newEvent.details;
+		return true;
+	} else {
+		return false;
+	}
+};
+
+exports.deleteById = function(id) {
+	let index = events.findIndex(event => event.id === id);
+	if(index !== -1) {
+		events.splice(index, 1);
+		return true;
+	} else {
+		return false;
+	}
 };

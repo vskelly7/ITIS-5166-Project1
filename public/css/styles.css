@@ -228,3 +228,10 @@ select:focus {
 .green {
   color: green;
 }
+
+button {
+  background-color: inherit;
+  border: none;
+  height: 100%;
+  padding: 0;
+}
