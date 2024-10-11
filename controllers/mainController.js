@@ -1,9 +1,13 @@
 const model = require('../models/event');
 
 exports.about = (req, res) => {
-    res.send('about');
+    res.render('about', { title: 'about' });
 };
 
 exports.contact = (req, res) => {
-    res.send('contact');
+    res.render('contact', { title: 'contact' });
 };
+
+exports.index = (req, res) => {
+	res.render("index", { title: "home"});
+}

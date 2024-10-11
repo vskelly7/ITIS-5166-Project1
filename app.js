@@ -18,19 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("tiny"));
 app.use(methodOverride('_method'));
 
-app.get("/", (req, res) => {
-	res.render("index", { title: "home"});
-});
-
 app.use("/events", eventRoutes);
 
-app.get("/about", (req, res) => {
-	res.render("about", {title: "about"});
-});
-
-app.get("/contact", (req,res) => {
-	res.render("contact", {title: "contact"});
-});
+app.use('/', mainRoutes)
 
 // 404
 app.use((req, res, next) => {

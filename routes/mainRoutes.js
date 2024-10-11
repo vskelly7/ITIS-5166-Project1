@@ -11,4 +11,6 @@ router.get("/about", mainController.about);
 //GET /: displays contact page to user
 router.get("/contact", mainController.contact);
 
+router.get("/", mainController.index);
+
 module.exports = router;
