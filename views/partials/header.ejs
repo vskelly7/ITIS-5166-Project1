@@ -1,18 +1,27 @@
 <header id="header">
-<div id="logo-container">
-	<a id="logo" href="/"
-		><img src="/img/logoWC.jpg" alt="Wanderers Club Logo"
-	/></a>
-</div>
-<div id="page-title">
-	<h1>Wanderers Club</h1>
-</div>
-<div id="user-nav">
-	<nav>
-		<ul>
-			<li><a href="">Log in</a></li>
-			<li><a href="">Sign Up</a></li>
-		</ul>
-	</nav>
-</div>
+	<div id="logo-container">
+		<a id="logo" href="/"
+			><img src="/img/logoWC.jpg" alt="Wanderers Club Logo"
+		/></a>
+	</div>
+	<div id="page-title">
+		<h1>Wanderers Club</h1>
+	</div>
+	<div id="user-nav">
+		<nav>
+			<ul>
+				<div>
+					<li>
+						[% if (title === 'new event') { %]
+						<a href="/events/new" class="active"> New Event </a>
+						[% } else { %]
+						<a href="/events/new"> New Event </a>
+						[% } %]
+					</li>
+					<li><a href="">Log in</a></li>
+					<li><a href="">Sign Up</a></li>
+				</div>
+			</ul>
+		</nav>
+	</div>
 </header>

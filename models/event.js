@@ -7,8 +7,8 @@ const events = [
 		category: "Educational",
 		title: "LCES 2050 - Introduction to Linguistic Anthropology",
 		host: "Vanessa Kelly",
-		start: DateTime.now(),
-		end: DateTime.now(),
+		start: DateTime.local(2024, 11, 15, 14, 0, 0, 0),
+		end: DateTime.local(2024, 11, 15, 17, 0, 0,),
 		details:
 			"Students enrolled in LCES 2050 can attended a guest lecture by a renowned sociolinguist who explored the impact of regional dialects on social identity. After the presentation, there will be a Q&A session and a group discussion on how these insights could be applied to the course.  Participating students will recieve an extra 3% added to their grade.",
 		image: "/img/prof.jpg",

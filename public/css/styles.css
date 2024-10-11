@@ -1,12 +1,3 @@
-@media screen and (min-width: 800px) {
-  .images {
-    max-width: 30%;
-  }
-  .image {
-    max-width: 85%;
-  }
-}
-
 :root {
   --base: #d6f7ff;
   --active: #2aaabf;
@@ -38,9 +29,16 @@ header {
   color: black;
   font-family: cursive;
   font-style: oblique;
+  gap: 5px;
+}
+
+#page-title {
+  font-size: 3.5vw;
 }
 
 #logo-container {
+  display: flex;
+  justify-content: center;
   height: 80px;
 }
 
@@ -61,6 +59,10 @@ img {
 
 #user-nav li {
   border: 1px outset white;
+}
+
+#user-nav ul {
+  display: flex;
 }
 
 #navigation {
@@ -90,7 +92,7 @@ li a {
   display: block;
   color: black;
   text-align: center;
-  padding: 14px 16px;
+  padding: 10px 13px;
   text-decoration: none;
 }
 
@@ -187,12 +189,12 @@ select:focus {
 
 .event {
   display: grid;
-  gap: 5%;
+  gap: 3%;
   grid-template-areas: "title title" "image info";
-  margin: 20px;
+  margin: 10px;
   text-align: left;
   width: 100%;
-  grid-auto-columns: auto 1fr;
+  grid-auto-columns: 1fr 1fr;
 }
 
 .event > .title {
@@ -235,3 +237,25 @@ button {
   height: 100%;
   padding: 0;
 }
+
+@media screen and (min-width: 750px) {
+  body {
+    font-size: default;
+  }
+  .images {
+    max-width: 30%;
+  }
+  .image {
+    max-width: 85%;
+  }
+  li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  #page-title{
+    font-size: inherit;
+  }
+} 
