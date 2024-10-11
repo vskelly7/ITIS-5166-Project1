@@ -7,6 +7,7 @@ const events = [
 		category: "Educational",
 		title: "LCES 2050 - Introduction to Linguistic Anthropology",
 		host: "Vanessa Kelly",
+		where: "Charlotte, NC",
 		start: DateTime.now(),
 		end: DateTime.now(),
 		details:
@@ -18,6 +19,7 @@ const events = [
 		category: "Educational",
 		title: "ITIS 5166 - Network Based Application Development",
 		host: "Jonathan Smith",
+		where: "Charlotte, NC",
 		start: DateTime.local(2024, 10, 30, 13, 0, 0, 0),
 		end: DateTime.local(2024, 10, 30, 15, 0, 0, 0),
 		details:
@@ -29,6 +31,7 @@ const events = [
 		category: "Educational",
 		title: "MBAD 6122 - Decision Modeling and Analysis",
 		host: "Vanessa Kelly",
+		where: "Charlotte, NC",
 		start: DateTime.local(2024, 11, 3, 9, 0, 0, 0),
 		end: DateTime.local(2024, 11, 3, 15, 0, 0, 0),
 		details:
@@ -40,6 +43,7 @@ const events = [
 		category: "Recreational",
 		title: "Fun at Carowinds",
 		host: "Jonathan Smith",
+		where: "Charlotte, NC",
 		start: DateTime.local(2024, 10, 31, 19, 0, 0, 0),
 		end: DateTime.local(2024, 10, 31, 21, 0, 0, 0),
 		details:
@@ -51,6 +55,7 @@ const events = [
 		category: "Recreational",
 		title: "Local Brewery Crawl",
 		host: "Vanessa Kelly",
+		where: "Charlotte, NC",
 		start: DateTime.local(2024, 11, 12, 14, 0, 0, 0),
 		end: DateTime.local(2024, 11, 12, 17, 0, 0, 0),
 		details: `We will meet at the Wooden Ropbot and continue to Sycamore Brewery and Monday Night Brewing from there. All brewery stops are within walking distance.  Join us to experience what's brewing in Charlotte!`,
@@ -61,6 +66,7 @@ const events = [
 		category: "Recreational",
 		title: "Farmers Market Meet Up",
 		host: "Jonathan Smith",
+		where: "Charlotte, NC",
 		start: DateTime.local(2024, 11, 20, 9, 0, 0, 0),
 		end: DateTime.local(2024, 11, 20, 11, 0, 0, 0),
 		details:
