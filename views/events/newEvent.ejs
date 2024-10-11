@@ -1,15 +1,15 @@
 [%- include('../partials/before') %]
+[% const categories = ["Educational", 'Recreational', 'Undergraduate', 'Graduate', 'Other'] %]
+
 <form action="/events" method="post" enctype="multipart/form-data">
 	<h2>Create a New Event</h2>
 	<div class="category">
 		<label for="category">Category</label>
 		<select name="category" id="category" required>
 			<option value="" disabled selected>-- Select an option --</option>
-			<option value="Recreational">Recreational</option>
-			<option value="Educational">Educational</option>
-			<option value="Undergraduate">Undergraduate</option>
-			<option value="Graduate">Graduate</option>
-			<option value="other">Other</option>
+			[% for (const category of categories) { %]
+			<option value="[%= category %]">[%= category %]</option>
+			[% } %]
 		</select>
 	</div>
 	<div class="title">
@@ -18,7 +18,7 @@
 	</div>
 	<div class="host">
 		<label for="host">Host</label>
-		<input type="text" name="host" id="host" />
+		<input type="text" name="host" id="host" required />
 	</div>
 	<div class="where">
 		<label for="where">Where</label>
