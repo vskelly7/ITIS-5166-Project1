@@ -1,4 +1,5 @@
 const model = require("../models/event");
+const { DateTime } = require("luxon");
 
 // GET /events : displays all events to the user
 exports.index = (req, res) => {
@@ -23,8 +24,9 @@ exports.create = (req, res) => {
 exports.show = (req, res, next) => {
 	let id = req.params.id;
 	let event = model.findById(id);
+	let formatted = {...event, start: DateTime.fromISO(event.start).toLocaleString(DateTime.DATETIME_SHORT), end: DateTime.fromISO(event.end).toLocaleString(DateTime.DATETIME_SHORT)}
 	if (event) {
-		res.render("./events/event", { event, title: "event" });
+		res.render("./events/event", { event: formatted, title: "event" });
 	} else {
 		let err = new Error('Cannot find event with id ' + id)
 		err.status = 404
@@ -37,7 +39,9 @@ exports.edit = (req, res, next) => {
 	let id = req.params.id;
 	let event = model.findById(id);
 	if (event) {
-		res.render("./events/edit", { event, title: "event" });
+		console.log(event.start + ' ' + event.end)
+		let newEvent = {...event, start: event.start.toString().slice(0, 16), end: event.end.toString().slice(0, 16)}
+		res.render("./events/edit", { event: newEvent, title: "event" });
 	} else {
 		let err = new Error('Cannot find event with id ' + id)
 		err.status = 404
@@ -47,21 +51,26 @@ exports.edit = (req, res, next) => {
 
 // PUT /events/:id : update the story identified by id
 exports.update = (req, res) => { 
-    let event = request.body;
+  let event = req.body;
 	let id = req.params.id;
 
 	if(model.updateById(id, event)) {
 		res.redirect('/events/'+id);
 	} else {
-		res.status(404).send("Cannot find story with id " +id);
+		let err = new Error('Cannot find event with id ' + id)
+		err.status = 404
+		next(err)
 	}
 };
 
 // DELETE /events/:id : deletes the event identified by id
 exports.delete = (req, res) => {
 	let id = req.params.id;
-	if(model.deleteById(id))
+	if (model.deleteById(id))
 		res.redirect('/events');
-	else
-		res.status(404).send('Cannot find event with id ' + id);
+	else {
+		let err = new Error('Cannot find event with id ' + id)
+		err.status = 404
+		next(err)
+	}
 };

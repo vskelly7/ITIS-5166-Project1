@@ -1,46 +1,50 @@
 [%- include('../partials/before') %]
+[% const categories = ['Educational', 'Recreational', 'Undergraduate', 'Graduate', 'Other'] %]
 
-<form method = "POST" action = '/event/[%= event.id%]?_method=PUT' >
+<form method = "POST" action = '/events/[%= event.id%]?_method=PUT' >
     <h2>Edit Event</h2>
     
     <div class="category">
         <label for="category">Category</label>
         <select name="category" id="category" required>
-            <option value="" disabled selected>-- Select an option --</option>
-            <option value="Recreational">Recreational</option>
-            <option value="Educational">Educational</option>
-            <option value="Undergraduate">Undergraduate</option>
-            <option value="Graduate">Graduate</option>
-            <option value="other">Other</option>
+            <option value="" disabled >-- Select an option --</option>
+            [% for (const category of categories) { 
+                if (event.category === category) {
+            %]            
+            <option value="[%= category %]" selected>[%= category %]</option>
+            [% } else { %]
+            <option value="[%= category %]">[%= category %]</option>
+            [%}
+            } %]
         </select>
     </div>
     <div class="title">
         <label for="title">Title</label>
-        <input type="text" id="title" name="title" required />
+        <input type="text" id="title" name="title" required value="[%= event.title %]"/>
     </div>
     <div class="host">
         <label for="host">Host</label>
-        <input type="text" name="host" id="host" />
+        <input type="text" name="host" id="host" value="[%= event.host %]" disabled required/>
     </div>
     <div class="where">
         <label for="where">Where</label>
-        <input type="text" name="where" id="where" required />
+        <input type="text" name="where" id="where" required value="[%= event.where %]"/>
     </div>
     <div class="start">
         <label for="start">Start</label>
-        <input type="datetime-local" name="start" id="start" required />
+        <input type="datetime-local" name="start" id="start" required value="[%= event.start %]"/>
     </div>
     <div class="end">
         <label for="end">End</label>
-        <input type="datetime-local" name="end" id="end" required />
+        <input type="datetime-local" name="end" id="end" required value="[%= event.end %]"/>
     </div>
     <div class="details">
         <label for="details">Details</label>
-        <textarea name="details" rows="3" id="details" required></textarea>
+        <textarea name="details" rows="3" id="details" required>[%= event.details %]</textarea>
     </div>
     <div class="image">
         <label for="image">Image</label>
-        <input type="file" name="image" id="image" required />
+        <input type="file" name="image" id="image" accept="image/jpeg, image/png, image/gif" />
     </div>
     <div class="create">
         <input type="submit" value="Update Connection" />

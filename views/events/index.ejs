@@ -4,7 +4,7 @@
 	const categories = ['Educational', 'Recreational', 'Undergraduate', 'Graduate', 'Other']
 	for (category of categories) {
 		let list = events.filter(event => event.category === category)
-		if (list.length >= 1) {
+		if (list.length) {
 	%]
 		<h1>[%= category %]</h1>
 		<ul>
@@ -16,7 +16,6 @@
 			</li>
 		[% }) %]
 		</ul>
-	[% 
-	}} %]
+	[% }} %]
 </div>
 [%- include('../partials/after') %]
