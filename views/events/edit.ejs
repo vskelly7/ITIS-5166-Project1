@@ -1,6 +1,6 @@
 [%- include('../partials/before') %]
 
-<form action = '/events' method = "POST">
+<form method = "POST" action = '/event/[%= event.id%]?_method=PUT' >
     <h2>Edit Event</h2>
     
     <div class="category">

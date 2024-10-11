@@ -47,7 +47,14 @@ exports.edit = (req, res, next) => {
 
 // PUT /events/:id : update the story identified by id
 exports.update = (req, res) => { 
-    res.send('update story with id ' + req.params.id);
+    let event = request.body;
+	let id = req.params.id;
+
+	if(model.updateById(id, event)) {
+		res.redirect('/events/'+id);
+	} else {
+		res.status(404).send("Cannot find story with id " +id);
+	}
 };
 
 // DELETE /events/:id : deletes the event identified by id

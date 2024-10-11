@@ -110,14 +110,16 @@ exports.save = (event) => {
 };
 
 exports.updateByID = function(id, newEvent) {
-	let event = events.find(event => event.id === id);
-	if(event) {
+	let event = events.findById(id);
+	if(story) {
 		event.title = newEvent.title;
 		event.details = newEvent.details;
 		return true;
 	} else {
 		return false;
 	}
+	
+	
 };
 
 exports.deleteById = function(id) {
