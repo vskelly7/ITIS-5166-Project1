@@ -16,21 +16,27 @@ exports.new = (req, res) => {
 exports.create = (req, res) => {
 	let event = req.body;
 	event.image = '/img/' + req.file.filename;
-		model.save(event);
-		res.redirect("/events");
+	model.save(event);
+	res.redirect("/events");
 };
 
 // GET /events/:id : send details of event identified by ID
 exports.show = (req, res, next) => {
 	let id = req.params.id;
 	let event = model.findById(id);
-	let formatted = {...event, start: DateTime.fromISO(event.start).toLocaleString(DateTime.DATETIME_SHORT), end: DateTime.fromISO(event.end).toLocaleString(DateTime.DATETIME_SHORT)}
 	if (event) {
+		let formatted = {
+			...event,
+			start: DateTime.fromISO(event.start).toLocaleString(
+				DateTime.DATETIME_SHORT
+			),
+			end: DateTime.fromISO(event.end).toLocaleString(DateTime.DATETIME_SHORT),
+		};
 		res.render("./events/event", { event: formatted, title: "event" });
 	} else {
-		let err = new Error('Cannot find event with id ' + id)
-		err.status = 404
-		next(err)
+		let err = new Error("Cannot find event with id " + id);
+		err.status = 404;
+		next(err);
 	}
 };
 
@@ -39,8 +45,11 @@ exports.edit = (req, res, next) => {
 	let id = req.params.id;
 	let event = model.findById(id);
 	if (event) {
-		console.log(event.start + ' ' + event.end)
-		let newEvent = {...event, start: event.start.toString().slice(0, 16), end: event.end.toString().slice(0, 16)}
+		let newEvent = {
+			...event,
+			start: event.start.toString().slice(0, 16),
+			end: event.end.toString().slice(0, 16)
+		}
 		res.render("./events/edit", { event: newEvent, title: "event" });
 	} else {
 		let err = new Error('Cannot find event with id ' + id)
