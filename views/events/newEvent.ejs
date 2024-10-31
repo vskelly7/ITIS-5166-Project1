@@ -20,9 +20,9 @@
 		<label for="host">Host</label>
 		<input type="text" name="host" id="host" required />
 	</div>
-	<div class="where">
-		<label for="where">Where</label>
-		<input type="text" name="where" id="where" required />
+	<div class="location">
+		<label for="location">Where</label>
+		<input type="text" name="location" id="location" required />
 	</div>
 	<div class="start">
 		<label for="start">Start</label>
@@ -34,11 +34,12 @@
 	</div>
 	<div class="details">
 		<label for="details">Details</label>
-		<textarea name="details" rows="3" id="details" required></textarea>
+		<textarea name="details" rows="3" id="details" minlength="10" required></textarea>
 	</div>
 	<div class="image">
 		<label for="image">Image</label>
 		<input type="file" name="image" id="image" required accept="image/jpeg, image/png, image/gif" />
+		 <!-- <input type="text" name="image" id="image">  was for mapping existing images to events for database integration-->
 	</div>
 	<div class="create">
 		<input type="submit" value="Create Connection" />
