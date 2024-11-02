@@ -22,7 +22,7 @@ router.get("/:id", eventController.show);
 router.get("/:id/edit", eventController.edit);
 
 //PUT /events/:id: update the event identified by id
-router.put("/:id", eventController.update);
+router.put("/:id", fileUpload, eventController.update);
 
 //DELETE /events/:id: delete the event identified by id
 router.delete("/:id", eventController.delete);
