@@ -19,7 +19,7 @@ body {
 }
 
 header {
-  background-image: url("../img/dolphinheader.jpg");
+  background-image: url("/img/dolphinheader.jpg");
   margin: 0;
   border-bottom: 5px solid var(--secondary);
   display: flex;
