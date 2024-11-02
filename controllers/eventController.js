@@ -1,17 +1,30 @@
 const model = require("../models/event");
+const path = require('path')
+const fs = require('fs')
 const { DateTime } = require("luxon");
+
+let categories = model.schema.path("category").enumValues;
+function deleteImage(event) {
+	fs.unlink(path.join(__dirname, "../public/", event.image), (err) => {
+		if (err) {
+			console.error("Failed to delete file:", err);
+		}
+	});
+}
 
 // GET /events : displays all events to the user
 exports.index = (req, res, next) => {
 	model
 		.find()
-		.then((events) => res.render("./events/index", { events, title: "events" }))
+		.then((events) =>
+			res.render("./events/index", { events, title: "events", categories })
+		)
 		.catch((err) => next(err));
 };
 
 // GET /events/new : send HTML form for creating a new event
 exports.new = (req, res) => {
-	res.render("./events/newEvent", { title: "new event" });
+	res.render("./events/newEvent", { title: "new event", categories })
 };
 
 // POST /events : create a new events
@@ -40,7 +53,8 @@ exports.show = (req, res, next) => {
 		return next(err);
 	}
 	model
-		.findById(id).lean()
+		.findById(id)
+		.lean()
 		.then((event) => {
 			if (event) {
 				let formatted = {
@@ -76,11 +90,17 @@ exports.edit = (req, res, next) => {
 			if (event) {
 				let newEvent = {
 					...event,
-					start: DateTime.fromJSDate(new Date(event.start)).toISO().slice(0, 19),
+					start: DateTime.fromJSDate(new Date(event.start))
+						.toISO()
+						.slice(0, 19),
 					end: DateTime.fromJSDate(new Date(event.end)).toISO().slice(0, 19),
 				};
-				console.log(newEvent)
-				res.render("./events/edit", { event: newEvent, title: "event" });
+				console.log(newEvent);
+				res.render("./events/edit", {
+					event: newEvent,
+					title: "event",
+					categories,
+				});
 			} else {
 				let err = new Error("Cannot find an event with id " + id);
 				err.status = 404;
@@ -93,6 +113,8 @@ exports.edit = (req, res, next) => {
 // PUT /events/:id : update the story identified by id
 exports.update = (req, res, next) => {
 	let event = req.body;
+	event.image = "/img/" + req.file.filename;
+	console.log(event)
 	let id = req.params.id;
 
 	if (!id.match(/^[0-9a-fA-F]{24}$/)) {
@@ -108,7 +130,8 @@ exports.update = (req, res, next) => {
 		})
 		.then((event) => {
 			if (event) {
-				res.redirect("/events/" + id, { event });
+				deleteImage(event);
+				res.redirect("/events/" + id);
 			} else {
 				let err = new Error("Cannot find event with id " + id);
 				err.status = 404;
@@ -135,6 +158,7 @@ exports.delete = (req, res, next) => {
 		.findByIdAndDelete(id, { useFindAndModify: false })
 		.then((event) => {
 			if (event) {
+				deleteImage(event);
 				res.redirect("/events");
 			} else {
 				let err = new Error("Cannot find event with id " + id);

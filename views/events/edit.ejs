@@ -1,7 +1,6 @@
 [%- include('../partials/before') %]
-[% const categories = ['Educational', 'Recreational', 'Undergraduate', 'Graduate', 'Other'] %]
 
-<form method = "POST" action = '/events/[%= event._id%]?_method=PUT' >
+<form method="POST" action='/events/[%= event._id%]?_method=PUT' enctype="multipart/form-data" >
     <h2>Edit Event</h2>
     
     <div class="category">
@@ -44,7 +43,7 @@
     </div>
     <div class="image">
         <label for="image">Image</label>
-        <input type="file" name="image" id="image" accept="image/jpeg, image/png, image/gif" />
+        <input type="file" name="image" id="image" accept="image/*" required/>
     </div>
     <div class="create">
         <input type="submit" value="Update Connection" />

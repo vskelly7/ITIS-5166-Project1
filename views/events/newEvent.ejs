@@ -1,5 +1,4 @@
 [%- include('../partials/before') %]
-[% const categories = ["Educational", 'Recreational', 'Undergraduate', 'Graduate', 'Other'] %]
 
 <form action="/events" method="post" enctype="multipart/form-data">
 	<h2>Create a New Event</h2>
@@ -34,12 +33,24 @@
 	</div>
 	<div class="details">
 		<label for="details">Details</label>
-		<textarea name="details" rows="3" id="details" minlength="10" required></textarea>
+		<textarea
+			name="details"
+			rows="3"
+			id="details"
+			minlength="10"
+			required
+		></textarea>
 	</div>
 	<div class="image">
 		<label for="image">Image</label>
-		<input type="file" name="image" id="image" required accept="image/jpeg, image/png, image/gif" />
-		 <!-- <input type="text" name="image" id="image">  was for mapping existing images to events for database integration-->
+		<input
+			type="file"
+			name="image"
+			id="image"
+			required
+			accept="image/jpeg, image/png, image/gif"
+		/>
+		<!-- <input type="text" name="image" id="image">  was for mapping existing images to events for database integration-->
 	</div>
 	<div class="create">
 		<input type="submit" value="Create Connection" />
