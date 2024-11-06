@@ -17,8 +17,12 @@
   },
   "homepage": "https://github.com/Me1anch01y/ITIS-5166-Project#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^5.1.0",
     "ejs": "^3.1.10",
     "express": "^4.21.0",
+    "express-session": "^1.18.1",
     "luxon": "^3.5.0",
     "method-override": "^3.0.0",
     "mongoose": "^8.7.3",
