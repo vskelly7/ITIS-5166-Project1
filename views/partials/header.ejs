@@ -11,6 +11,9 @@
 		<nav>
 			<ul>
 				<div>
+
+					[% if (login) { %]
+
 					<li>
 						[% if (title === 'new event') { %]
 						<a href="/events/new" class="active">New Event</a>
@@ -18,6 +21,11 @@
 						<a href="/events/new">New Event</a>
 						[% } %]
 					</li>
+
+					<li><a href="/users/logout">Log Out</a></li>
+
+					[% } else { %]
+
 					<li>
 						[% if (title === 'login') { %]
 						<a href="/users/login" class="active">Log In</a>
@@ -32,6 +40,8 @@
 						<a href="/users/new">Sign Up</a>
 						[% } %]
 					</li>
+
+					[% } %]
 				</div>
 			</ul>
 		</nav>

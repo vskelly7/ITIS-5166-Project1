@@ -8,6 +8,7 @@ exports.new = (req, res)=> {
 //create new user
 exports.newUser = (req, res)=>{
     let user = new User(req.body);
+    user.email = user.email.toLowerCase()
     user.save()
     .then(()=>res.redirect('/users/login'))
     .catch(err=>{
@@ -31,7 +32,7 @@ exports.login = (req, res)=>{
 //process login request
 exports.processLogin = (req, res)=>{
     //authenticate user's login req
-    let email = req.body.email;
+    let email = req.body.email.toLowerCase();
     let password = req.body.password;
     //get user matching email
     User.findOne({email: email})
@@ -63,7 +64,7 @@ exports.processLogin = (req, res)=>{
 exports.profile = (req, res, next)=>{
     let id = req.session.user;
     User.findById(id)
-    .then(user=>res.render('user/profile', {user}))
+    .then(user=>res.render('user/profile', {title: 'profile',user}))
     .catch(err=>next(err));
 };
 

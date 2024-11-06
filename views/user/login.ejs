@@ -1,10 +1,16 @@
 [%- include('../partials/before.ejs')%]
 <form action="/users/login" method="POST">
-	<label for="email">Email</label><br />
-	<input type="email" id="email" name="email" required /><br /><br />
-	<label for="password">Password</label><br />
-	<input type="password" id="password" name="password" required /><br /><br />
-	<button>Login</button><br />
+	<div class="email">
+		<label for="email">Email</label>
+		<input type="email" id="email" name="email" required />
+	</div>
+
+	<div class="password">
+		<label for="password">Password</label>
+		<input type="password" id="password" name="password" required />
+	</div>
+
+	<input type="submit" value="Log In">
 </form>
 
 [%- include('../partials/after') %]
