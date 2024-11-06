@@ -23,8 +23,7 @@ app.set("view engine", "ejs");
 const mongUri = 'mongodb+srv://vkelly7:nbad123@nbadproject.a6f5w.mongodb.net/nbad-project3?retryWrites=true&w=majority&appName=NBADproject';
 
 //connecting database
-mongoose.connect(mongUri,
-	{useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(mongUri)
 .then(()=> {
 //start the server
     app.listen(port, host, ()=>{
@@ -38,7 +37,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("tiny"));
 app.use(methodOverride('_method'));
-
+//session information
 app.use(session({
 	secret: 'TO REPLACE THIS',
 	resave: false,
@@ -46,9 +45,8 @@ app.use(session({
 	cookie: {maxAge: 60*60*1000},
 	store: new mongoStore({mongoUrl: 'mongodb+srv://vkelly7:nbad123@nbadproject.a6f5w.mongodb.net/nbad-project3?retryWrites=true&w=majority&appName=NBADproject'})
 }));
-
 app.use(flash());
-
+//error and success messages
 app.use((req, res, next)=>{
 	console.log(req.session);
     res.locals.successMessages = req.flash('success');
@@ -56,7 +54,7 @@ app.use((req, res, next)=>{
     next();
 });
 
-//setup routes
+// routes
 app.use("/events", eventRoutes);
 app.use('/', mainRoutes)
 app.use('/users', userRoutes);
