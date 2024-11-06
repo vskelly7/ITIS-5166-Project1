@@ -1,10 +1,14 @@
+const flash = require('connect-flash');
 const express = require("express");
 const ejs = require("ejs");
-const morgan = require("morgan");
 const eventRoutes = require("./routes/eventRoutes");
 const mainRoutes = require("./routes/mainRoutes");
 const methodOverride = require('method-override');
 const mongoose = require('mongoose')
+const mongoStore = require('connect-mongo');
+const morgan = require("morgan");
+const session = require('express-session');
+const userRoutes = require('./routes/userRoutes')
 
 ejs.openDelimiter = "[";
 ejs.closeDelimiter = "]";
@@ -19,7 +23,8 @@ app.set("view engine", "ejs");
 const mongUri = 'mongodb+srv://vkelly7:nbad123@nbadproject.a6f5w.mongodb.net/nbad-project3?retryWrites=true&w=majority&appName=NBADproject';
 
 //connecting database
-mongoose.connect(mongUri)
+mongoose.connect(mongUri,
+	{useNewUrlParser: true, useUnifiedTopology: true})
 .then(()=> {
 //start the server
     app.listen(port, host, ()=>{
@@ -34,9 +39,27 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("tiny"));
 app.use(methodOverride('_method'));
 
+app.use(session({
+	secret: 'TO REPLACE THIS',
+	resave: false,
+	saveUninitialized: false,
+	cookie: {maxAge: 60*60*1000},
+	store: new mongoStore({mongoUrl: 'mongodb+srv://vkelly7:nbad123@nbadproject.a6f5w.mongodb.net/nbad-project3?retryWrites=true&w=majority&appName=NBADproject'})
+}));
+
+app.use(flash());
+
+app.use((req, res, next)=>{
+	console.log(req.session);
+    res.locals.successMessages = req.flash('success');
+    res.locals.errorMessages = req.flash('error');
+    next();
+});
+
 //setup routes
 app.use("/events", eventRoutes);
 app.use('/', mainRoutes)
+app.use('/users', userRoutes);
 
 // 404
 app.use((req, res, next) => {
