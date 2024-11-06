@@ -13,27 +13,34 @@
 				<div>
 					<li>
 						[% if (title === 'new event') { %]
-						<a href="/events/new" class="active"> New Event </a>
+						<a href="/events/new" class="active">New Event</a>
 						[% } else { %]
-						<a href="/events/new"> New Event </a>
+						<a href="/events/new">New Event</a>
 						[% } %]
 					</li>
-					<li><a href="/user/login">Log in</a></li>
-					<li><a href="/user/new">Sign Up</a></li>
+					<li>
+						[% if (title === 'login') { %]
+						<a href="/users/login" class="active">Log In</a>
+						[% } else { %]
+						<a href="/users/login">Log In</a>
+						[% } %]
+					</li>
+					<li>
+						[% if (title === 'new user') { %]
+						<a href="/users/new" class="active">Sign Up</a>
+						[% } else { %]
+						<a href="/users/new">Sign Up</a>
+						[% } %]
+					</li>
 				</div>
 			</ul>
 		</nav>
 	</div>
 </header>
 
-[%if(errorMessages.length > 0) {
-    errorMessages.forEach(message=>{%]
-    <div class = 'error'> [%=message%] </div>
-    [% });
-}%]
-    
-[%if(successMessages.length > 0) {
-    successMessages.forEach(message=>{%]
-    <div class = 'success'> [%=message%] </div>
-    [% });
-}%]
+[%if(errorMessages.length > 0) { errorMessages.forEach(message=>{%]
+<div class="error">[%=message%]</div>
+[% }); }%] [%if(successMessages.length > 0) {
+successMessages.forEach(message=>{%]
+<div class="success">[%=message%]</div>
+[% }); }%]
