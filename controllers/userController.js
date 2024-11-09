@@ -2,12 +2,13 @@ const User = require('../models/user');
 
 //get the new user form
 exports.new = (req, res)=> {
-    res.render('user/new');
+    res.render('user/new', {title: 'new user'});
 };
 
 //create new user
 exports.newUser = (req, res)=>{
     let user = new User(req.body);
+    user.email = user.email.toLowerCase()
     user.save()
     .then(()=>res.redirect('/users/login'))
     .catch(err=>{
@@ -25,13 +26,13 @@ exports.newUser = (req, res)=>{
 
 //get login page
 exports.login = (req, res)=>{
-    res.render('user/login');
+    res.render('user/login', {title: 'login'});
 };
 
 //process login request
 exports.processLogin = (req, res)=>{
     //authenticate user's login req
-    let email = req.body.email;
+    let email = req.body.email.toLowerCase();
     let password = req.body.password;
     //get user matching email
     User.findOne({email: email})
@@ -43,7 +44,7 @@ exports.processLogin = (req, res)=>{
                     if(result) {
                         req.session.user = user._id;  //store user id in session
                         req.flash('success', 'You have successfully logged in.');
-                        res.redirect('/users/profile');
+                        res.redirect('/users/profile', );
                     } else {
                         //console.log("wrong password");
                         req.flash('error', 'Wrong password');
@@ -63,7 +64,7 @@ exports.processLogin = (req, res)=>{
 exports.profile = (req, res, next)=>{
     let id = req.session.user;
     User.findById(id)
-    .then(user=>res.render('user/profile', {user}))
+    .then(user=>res.render('user/profile', {title: 'profile',user}))
     .catch(err=>next(err));
 };
 
