@@ -1,23 +1,24 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/userController');
+const {isGuest, isLoggedIn} = require('../middleware/auth');
 
 //render new user page at /users/new
-router.get('/new', controller.new);
+router.get('/new', isGuest, controller.new);
 
 //create new user
-router.post('/new', controller.newUser);
+router.post('/new', isGuest, controller.newUser);
 
 //get login page at /users/login
-router.get('/login', controller.login);
+router.get('/login', isGuest, controller.login);
 
 //process login request
-router.post('/login', controller.processLogin);
+router.post('/login', isGuest, controller.processLogin);
 
 //get profile
-router.get('/profile', controller.profile);
+router.get('/profile', isLoggedIn, controller.profile);
 
 //logout request
-router.use('/logout', controller.logout);
+router.use('/logout', isLoggedIn, controller.logout);
 
 module.exports = router;

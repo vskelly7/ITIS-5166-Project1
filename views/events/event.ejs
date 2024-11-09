@@ -3,7 +3,8 @@
 <div class="event">
 	<div class="title">
 		<h2>[%= event.title%]</h2>
-
+		
+		[%if(user == event.host._id) {%]
 		<div class="modify">
 			<form>
 				<button type = "submit" formmethod = "GET" formaction = "/events/[%= event._id %]/edit"><i class="fa-regular fa-pen-to-square fa-border fa-xl green"></i></button>
@@ -15,6 +16,7 @@
 				<button type = "submit" formmethod = "POST" formaction = "/events/[%= event._id %]?_method=DELETE"><i class="fa-solid fa-trash-alt fa-border fa-xl red"></i></button>
 			</form>
 		</div>
+		[%}%]
 	</div>
 
 	<div class="image">
@@ -24,7 +26,7 @@
 		[% } %]
 	</div>
 	<div class="info">
-		<p><b>Host: </b>[%= event.host%]</p>
+		<p><b>Host: </b>[%= event.host.firstName + ' ' + event.host.lastName%]</p>
 		<p><b>Start Date and Time: </b>[%= event.start %]</p>
 		<p><b>End Date and Time: </b>[%= event.end %]</p>
 		<p><b>Location: </b>[%= event.location%]</p>

@@ -30,8 +30,10 @@ exports.new = (req, res) => {
 // POST /events : create a new events
 exports.create = (req, res, next) => {
 	let event = new model(req.body);
+	event.host = req.session.user;
 	event.image = "/img/" + req.file.filename;
 	console.log(event);
+	
 	event
 		.save(event)
 		.then(res.redirect("/events"))
@@ -53,7 +55,7 @@ exports.show = (req, res, next) => {
 		return next(err);
 	}
 	model
-		.findById(id)
+		.findById(id).populate('host', 'firstName lastName')
 		.lean()
 		.then((event) => {
 			if (event) {
@@ -66,7 +68,8 @@ exports.show = (req, res, next) => {
 						DateTime.DATETIME_SHORT
 					),
 				};
-				res.render("./events/event", { event: formatted, title: "event" });
+				console.log(event);
+				return res.render("./events/event", { event: formatted, title: "event" });
 			} else {
 				let err = new Error("Cannot find event with id " + id);
 				err.status = 404;
@@ -79,35 +82,22 @@ exports.show = (req, res, next) => {
 //GET /events/:id/edit : send html form for editing existing story
 exports.edit = (req, res, next) => {
 	let id = req.params.id;
-	//an ObjectId is 24-bit Hex string
-	if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-		let err = new Error("Invalid event id");
-		err.status = 400;
-		return next(err);
-	}
 	model.findById(id).lean()
-		.then((event) => {
-			if (event) {
-				let newEvent = {
-					...event,
-					start: DateTime.fromJSDate(new Date(event.start))
-						.toISO()
-						.slice(0, 19),
-					end: DateTime.fromJSDate(new Date(event.end)).toISO().slice(0, 19),
-				};
-				console.log(newEvent);
-				res.render("./events/edit", {
-					event: newEvent,
-					title: "event",
-					categories,
-				});
-			} else {
-				let err = new Error("Cannot find an event with id " + id);
-				err.status = 404;
-				next(err);
-			}
-		})
-		.catch((err) => next(err));
+	.then((event) => {
+		let newEvent = {
+			...event,
+			start: DateTime.fromJSDate(new Date(event.start))
+				.toISO()
+				.slice(0, 19),
+			end: DateTime.fromJSDate(new Date(event.end)).toISO().slice(0, 19),
+		};
+		res.render("./events/edit", {
+			event: newEvent,
+			title: "event",
+			categories,
+		});
+	})
+	.catch((err) => next(err));
 };
 
 // PUT /events/:id : update the story identified by id
@@ -117,26 +107,14 @@ exports.update = (req, res, next) => {
 	console.log(event)
 	let id = req.params.id;
 
-	if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-		let err = new Error("Invalid event id");
-		err.status = 400;
-		return next(err);
-	}
-
 	model
 		.findByIdAndUpdate(id, event, {
 			useFindAndModify: false,
 			runValidators: true,
 		})
 		.then((event) => {
-			if (event) {
-				deleteImage(event);
-				res.redirect("/events/" + id);
-			} else {
-				let err = new Error("Cannot find event with id " + id);
-				err.status = 404;
-				next(err);
-			}
+			deleteImage(event);
+			res.redirect("/events/" + id);
 		})
 		.catch((err) => {
 			if (err.name === "ValidationError") err.status = 400;
@@ -148,23 +126,11 @@ exports.update = (req, res, next) => {
 exports.delete = (req, res, next) => {
 	let id = req.params.id;
 
-	if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-		let err = new Error("Invalid event id");
-		err.status = 400;
-		return next(err);
-	}
-
 	model
 		.findByIdAndDelete(id, { useFindAndModify: false })
 		.then((event) => {
-			if (event) {
-				deleteImage(event);
-				res.redirect("/events");
-			} else {
-				let err = new Error("Cannot find event with id " + id);
-				err.status = 404;
-				next(err);
-			}
+			deleteImage(event);
+			res.redirect("/events");
 		})
 		.catch((err) => next(err));
 };

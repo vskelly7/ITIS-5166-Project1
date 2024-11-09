@@ -60,7 +60,7 @@ app.use((req, res, next) => {
 	console.log(req.session);
 	res.locals.successMessages = req.flash("success");
 	res.locals.errorMessages = req.flash("error");
-	res.locals.login = req.session.user ? true : false;
+	res.locals.user = req.session.user ? true : false;
 	next();
 });
 
