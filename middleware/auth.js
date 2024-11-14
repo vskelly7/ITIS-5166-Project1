@@ -26,7 +26,7 @@ exports.isHost = (req, res, next) => {
   Event.findById(id)
     .then(event => {
       if (event) {
-        if (event.host === req.session.user) {
+        if (event.host._id == req.session.user) {
           next()
         } else {
           let err = new Error('Unauthorized to access the resource')
