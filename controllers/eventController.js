@@ -30,6 +30,7 @@ exports.new = (req, res) => {
 // POST /events : create a new events
 exports.create = (req, res, next) => {
 	let event = new model(req.body);
+	event.host = req.session.user;
 	event.image = "/img/" + req.file.filename;
 	console.log(event);
 	event
@@ -48,6 +49,7 @@ exports.show = (req, res, next) => {
 	let id = req.params.id;
 	model
 		.findById(id)
+		.populate("host", "firstName lastName")
 		.lean()
 		.then((event) => {
 			if (event) {

@@ -12,8 +12,8 @@ const eventSchema = new Schema({
 		required: [true, "Title is required"],
 	},
 	host: {
-		type: String,
-		required: [true, "Host is required"],
+		type: Schema.Types.ObjectId,
+		ref: "User",
 	},
 	location: {
 		type: String,
@@ -34,7 +34,7 @@ const eventSchema = new Schema({
 	},
 	image: {
 		type: String,
-		required: [true, 'Image is required'],
+		required: [true, "Image is required"],
 		unique: true,
 	},
 });
