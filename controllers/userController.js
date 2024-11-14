@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Event = require('../models/event')
 
 //get the new user form
 exports.new = (req, res)=> {
@@ -63,8 +64,10 @@ exports.processLogin = (req, res)=>{
 //get profile
 exports.profile = (req, res, next)=>{
     let id = req.session.user;
-    User.findById(id)
-    .then(user=>res.render('user/profile', {title: 'profile',user}))
+    Promise.all([User.findById(id), Event.find({host: id})])
+        .then(([user, events]) => {
+        res.render('user/profile', {title: 'profile', user, events});
+})
     .catch(err=>next(err));
 };
 

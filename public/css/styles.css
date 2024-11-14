@@ -115,6 +115,7 @@ main {
   width: 87%;
   margin: 1rem auto;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   column-gap: 30px;
@@ -122,6 +123,11 @@ main {
 
 .content-wrapper li {
   background-color: var(--tertiary);
+}
+
+.heading {
+  flex-basis: 100%;
+  margin: 0 auto;
 }
 
 .words {

@@ -1,3 +1,17 @@
-[%- include('../partials/before.ejs')%]
-<h2>Welcome, [%= user.firstName + " " + user.lastName%]</h2>
+[%- include('../partials/before.ejs') %]
+<div class="heading">
+  <h2>Welcome, [%= user.firstName + " " + user.lastName %]</h2>
+</div>
+[% if (events.length) { %]
+    <p>You have created the following events:</p>
+    <ul>
+    [% events.forEach(event => { %]
+      <li>
+        <a href='/events/[%= event.id %]'><p>[%= event.title %]</p></a>
+      </li>
+    [% }); %]
+    </ul>
+[% } else { %]
+    <h3>You have not created any events</h3>
+[% } %]
 [%- include('../partials/after') %]
