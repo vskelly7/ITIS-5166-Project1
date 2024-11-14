@@ -3,6 +3,7 @@
 const express = require("express");
 const eventController = require("../controllers/eventController");
 const { fileUpload } = require("../middleware/fileUpload");
+const { validateId } = require('../middleware/validator')
 
 const router = express.Router();
 
@@ -16,15 +17,15 @@ router.get("/new", eventController.new);
 router.post("/", fileUpload, eventController.create);
 
 //GET /events/:id: send details of event identified by id
-router.get("/:id", eventController.show);
+router.get("/:id", validateId, eventController.show);
 
 //GET /events/:id/edit: send the html form for editing an existing event
-router.get("/:id/edit", eventController.edit);
+router.get("/:id/edit", validateId, eventController.edit);
 
 //PUT /events/:id: update the event identified by id
-router.put("/:id", fileUpload, eventController.update);
+router.put("/:id", validateId, fileUpload, eventController.update);
 
 //DELETE /events/:id: delete the event identified by id
-router.delete("/:id", eventController.delete);
+router.delete("/:id", validateId, eventController.delete);
 
 module.exports = router;

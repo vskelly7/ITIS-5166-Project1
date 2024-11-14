@@ -46,12 +46,6 @@ exports.create = (req, res, next) => {
 // GET /events/:id : send details of event identified by ID
 exports.show = (req, res, next) => {
 	let id = req.params.id;
-	//an ObjectId is 24-bit Hex string
-	if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-		let err = new Error("Invalid event id");
-		err.status = 404;
-		return next(err);
-	}
 	model
 		.findById(id)
 		.lean()
@@ -79,12 +73,6 @@ exports.show = (req, res, next) => {
 //GET /events/:id/edit : send html form for editing existing story
 exports.edit = (req, res, next) => {
 	let id = req.params.id;
-	//an ObjectId is 24-bit Hex string
-	if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-		let err = new Error("Invalid event id");
-		err.status = 400;
-		return next(err);
-	}
 	model.findById(id).lean()
 		.then((event) => {
 			if (event) {
@@ -117,12 +105,6 @@ exports.update = (req, res, next) => {
 	console.log(event)
 	let id = req.params.id;
 
-	if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-		let err = new Error("Invalid event id");
-		err.status = 400;
-		return next(err);
-	}
-
 	model
 		.findByIdAndUpdate(id, event, {
 			useFindAndModify: false,
@@ -147,12 +129,6 @@ exports.update = (req, res, next) => {
 // DELETE /events/:id : deletes the event identified by id
 exports.delete = (req, res, next) => {
 	let id = req.params.id;
-
-	if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-		let err = new Error("Invalid event id");
-		err.status = 400;
-		return next(err);
-	}
 
 	model
 		.findByIdAndDelete(id, { useFindAndModify: false })
