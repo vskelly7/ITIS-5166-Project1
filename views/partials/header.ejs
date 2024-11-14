@@ -15,30 +15,20 @@
 					[% if (user) { %]
 
 					<li>
-						[% if (title === 'new event') { %]
-						<a href="/events/new" class="active">New Event</a>
-						[% } else { %]
-						<a href="/events/new">New Event</a>
-						[% } %]
+						<a href="/events/new" class="[%= (title === 'new event') ? 'active' : '' %]">New Event</a>
 					</li>
-
+					<li>
+							<a href="/users/profile" class="[%= (title === 'profile') ? 'active' : '' %]">Profile</a>
+					</li>
 					<li><a href="/users/logout">Log Out</a></li>
 
 					[% } else { %]
 
 					<li>
-						[% if (title === 'login') { %]
-						<a href="/users/login" class="active">Log In</a>
-						[% } else { %]
-						<a href="/users/login">Log In</a>
-						[% } %]
+						<a href="/users/login" class="[%= (title === 'login') ? 'active' : '' %]">Log In</a>
 					</li>
 					<li>
-						[% if (title === 'new user') { %]
-						<a href="/users/new" class="active">Sign Up</a>
-						[% } else { %]
-						<a href="/users/new">Sign Up</a>
-						[% } %]
+						<a href="/users/new" class="[%= (title === 'new user') ? 'active' : '' %]">Sign Up</a>
 					</li>
 
 					[% } %]
