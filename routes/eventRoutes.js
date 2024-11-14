@@ -4,6 +4,7 @@ const express = require("express");
 const eventController = require("../controllers/eventController");
 const { fileUpload } = require("../middleware/fileUpload");
 const { validateId } = require('../middleware/validator')
+const { isHost, isLoggedIn} = require('../middleware/auth')
 
 const router = express.Router();
 
@@ -11,21 +12,28 @@ const router = express.Router();
 router.get("/", eventController.index);
 
 //GET /events/new: send html form for creating new event
-router.get("/new", eventController.new);
+router.get("/new", isLoggedIn, eventController.new);
 
 //POST /events: create a new event
-router.post("/", fileUpload, eventController.create);
+router.post("/", isLoggedIn, fileUpload, eventController.create);
 
 //GET /events/:id: send details of event identified by id
 router.get("/:id", validateId, eventController.show);
 
 //GET /events/:id/edit: send the html form for editing an existing event
-router.get("/:id/edit", validateId, eventController.edit);
+router.get("/:id/edit", isLoggedIn, validateId, isHost, eventController.edit);
 
 //PUT /events/:id: update the event identified by id
-router.put("/:id", validateId, fileUpload, eventController.update);
+router.put(
+	"/:id",
+	isLoggedIn,
+	validateId,
+	isHost,
+	fileUpload,
+	eventController.update
+);
 
 //DELETE /events/:id: delete the event identified by id
-router.delete("/:id", validateId, eventController.delete);
+router.delete("/:id", isLoggedIn, validateId, isHost, eventController.delete);
 
 module.exports = router;
