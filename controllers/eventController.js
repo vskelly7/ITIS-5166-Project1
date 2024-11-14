@@ -115,6 +115,7 @@ exports.update = (req, res, next) => {
 		.then((event) => {
 			if (event) {
 				deleteImage(event);
+				req.flash('success', 'Event successfully updated');
 				res.redirect("/events/" + id);
 			} else {
 				let err = new Error("Cannot find event with id " + id);
@@ -137,6 +138,7 @@ exports.delete = (req, res, next) => {
 		.then((event) => {
 			if (event) {
 				deleteImage(event);
+				req.flash('success', 'Event successfully deleted')
 				res.redirect("/events");
 			} else {
 				let err = new Error("Cannot find event with id " + id);
