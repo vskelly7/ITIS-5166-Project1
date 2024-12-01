@@ -168,7 +168,7 @@ exports.rsvp = (req, res, next) => {
 		.then((rsvp) => {
 			if (rsvp) {
 				req.flash("success", "RSVP completed");
-				res.redirect("/events/" + id);
+				res.redirect("/users/profile");
 			} else {
 				req.flash("error", "There was an issue with your RSVP");
 			}

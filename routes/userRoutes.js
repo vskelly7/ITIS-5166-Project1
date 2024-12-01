@@ -15,7 +15,7 @@ router.post('/new', isGuest, validateSignUp, validateResult, controller.newUser)
 router.get('/login', isGuest, controller.login);
 
 //process login request
-router.post('/login', logInLimiter, isGuest, validateLogIn, validateResult, controller.processLogin);
+router.post('/login', logInLimiter, isGuest, controller.processLogin);
 
 //get profile
 router.get('/profile', isLoggedIn, controller.profile);
