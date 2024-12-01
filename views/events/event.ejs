@@ -43,15 +43,7 @@
 		<p><b>End Date and Time: </b>[%= event.end %]</p>
 		<p><b>Location: </b>[%= event.location%]</p>
 		<p><b>Details: </b>[%= event.details%]</p>
+		<p><b>Number of rsvps: </b>[%= rsvps %]</p>
 	</div>
 </div>
-<script>
-	function openForm() {
-		document.getElementById("myForm").style.display = "block";
-	}
-	
-	function closeForm() {
-		document.getElementById("myForm").style.display = "none";
-	}
-</script>
 [%- include('../partials/after') %]

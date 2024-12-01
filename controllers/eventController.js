@@ -48,11 +48,11 @@ exports.create = (req, res, next) => {
 // GET /events/:id : send details of event identified by ID
 exports.show = (req, res, next) => {
 	let id = req.params.id;
-	model
-		.findById(id)
-		.populate("host", "firstName lastName")
-		.lean()
-		.then((event) => {
+	Promise.all([
+		model.findById(id).populate("host", "firstName lastName").lean(),
+		Rsvp.countDocuments({ event: id, status: 'YES' }),
+	])
+		.then(([event, count]) => {
 			if (event) {
 				let formatted = {
 					...event,
@@ -63,7 +63,11 @@ exports.show = (req, res, next) => {
 						DateTime.DATETIME_SHORT
 					),
 				};
-				res.render("./events/event", { event: formatted, title: "event" });
+				res.render("./events/event", {
+					event: formatted,
+					title: "event",
+					rsvps: count,
+				});
 			} else {
 				let err = new Error("Cannot find event with id " + id);
 				err.status = 404;
@@ -156,13 +160,17 @@ exports.rsvp = (req, res, next) => {
 	let id = req.params.id;
 	let user = req.session.user;
 	let status = req.body.status;
-	Rsvp.findOneAndUpdate({ event: id, user: user }, { status: status }, { upsert: true })
+	Rsvp.findOneAndUpdate(
+		{ event: id, user: user },
+		{ status: status },
+		{ upsert: true }
+	)
 		.then((rsvp) => {
 			if (rsvp) {
 				req.flash("success", "RSVP completed");
 				res.redirect("/events/" + id);
 			} else {
-				req.flash('error', 'There was an issue with your RSVP')
+				req.flash("error", "There was an issue with your RSVP");
 			}
 		})
 		.catch((err) => next(err));
