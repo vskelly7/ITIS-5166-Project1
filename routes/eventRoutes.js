@@ -3,7 +3,7 @@
 const express = require("express");
 const eventController = require("../controllers/eventController");
 const { fileUpload } = require("../middleware/fileUpload");
-const { validateId } = require('../middleware/validator')
+const { validateId, validateEvent, validateResult } = require('../middleware/validator')
 const { isHost, isLoggedIn} = require('../middleware/auth')
 
 const router = express.Router();
