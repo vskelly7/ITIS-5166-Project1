@@ -36,4 +36,6 @@ router.put(
 //DELETE /events/:id: delete the event identified by id
 router.delete("/:id", isLoggedIn, validateId, isHost, eventController.delete);
 
+router.post("/:id/rsvp", isLoggedIn, validateId, eventController.rsvp)
+
 module.exports = router;

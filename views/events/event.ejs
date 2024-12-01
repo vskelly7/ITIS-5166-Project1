@@ -6,15 +6,35 @@
 		[% if (user == event.host._id) { %]
 		<div class="modify">
 			<form>
-				<button type = "submit" formmethod = "GET" formaction = "/events/[%= event._id %]/edit"><i class="fa-regular fa-pen-to-square fa-border fa-xl green"></i></button>
+				<button type = "submit" formmethod = "GET" formaction = "/events/[%= event._id %]/edit"><i class="fa-regular fa-pen-to-square fa-border fa-xl"></i></button>
 			</form>
 		</div>
-			
 		<div class="remove">
 			<form>
-				<button type = "submit" formmethod = "POST" formaction = "/events/[%= event._id %]?_method=DELETE"><i class="fa-solid fa-trash-alt fa-border fa-xl red"></i></button>
+				<button type = "submit" formmethod = "POST" formaction = "/events/[%= event._id %]?_method=DELETE"><i class="fa-solid fa-trash-alt fa-border fa-xl"></i></button>
 			</form>
 		</div>
+
+		[% } else { %]
+
+			<div class="rsvp">
+				<button id="rsvp-button" class="rsvp-button">RSVP</button>
+				<div id="rsvp-options" class="rsvp-options hidden">
+					<form method="POST" action="/events/[%= event._id %]/rsvp">
+						<button type="submit" class="option-button" name="status" value="YES">YES</button>
+						<button type="submit" class="option-button" name="status" value="NO">NO</button>
+						<button type="submit" class="option-button" name="status" value="MAYBE">MAYBE</button>
+					</form>
+				</div>
+			</div>
+			
+			<script>
+				document.getElementById('rsvp-button').addEventListener('click', function () {
+					const options = document.getElementById('rsvp-options');
+					options.classList.toggle('hidden'); // Show/hide RSVP options
+				});
+			</script>
+			
 		[% } %]
 	</div>
 
@@ -32,4 +52,13 @@
 		<p><b>Details: </b>[%= event.details%]</p>
 	</div>
 </div>
+<script>
+	function openForm() {
+		document.getElementById("myForm").style.display = "block";
+	}
+	
+	function closeForm() {
+		document.getElementById("myForm").style.display = "none";
+	}
+</script>
 [%- include('../partials/after') %]

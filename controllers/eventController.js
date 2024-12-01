@@ -1,6 +1,7 @@
 const model = require("../models/event");
-const path = require('path')
-const fs = require('fs')
+const Rsvp = require("../models/rsvp");
+const path = require("path");
+const fs = require("fs");
 const { DateTime } = require("luxon");
 
 let categories = model.schema.path("category").enumValues;
@@ -24,7 +25,7 @@ exports.index = (req, res, next) => {
 
 // GET /events/new : send HTML form for creating a new event
 exports.new = (req, res) => {
-	res.render("./events/newEvent", { title: "new event", categories })
+	res.render("./events/newEvent", { title: "new event", categories });
 };
 
 // POST /events : create a new events
@@ -75,7 +76,9 @@ exports.show = (req, res, next) => {
 //GET /events/:id/edit : send html form for editing existing story
 exports.edit = (req, res, next) => {
 	let id = req.params.id;
-	model.findById(id).lean()
+	model
+		.findById(id)
+		.lean()
 		.then((event) => {
 			if (event) {
 				let newEvent = {
@@ -104,7 +107,7 @@ exports.edit = (req, res, next) => {
 exports.update = (req, res, next) => {
 	let event = req.body;
 	event.image = "/img/" + req.file.filename;
-	console.log(event)
+	console.log(event);
 	let id = req.params.id;
 
 	model
@@ -115,7 +118,7 @@ exports.update = (req, res, next) => {
 		.then((event) => {
 			if (event) {
 				deleteImage(event);
-				req.flash('success', 'Event successfully updated');
+				req.flash("success", "Event successfully updated");
 				res.redirect("/events/" + id);
 			} else {
 				let err = new Error("Cannot find event with id " + id);
@@ -138,12 +141,28 @@ exports.delete = (req, res, next) => {
 		.then((event) => {
 			if (event) {
 				deleteImage(event);
-				req.flash('success', 'Event successfully deleted')
+				req.flash("success", "Event successfully deleted");
 				res.redirect("/events");
 			} else {
 				let err = new Error("Cannot find event with id " + id);
 				err.status = 404;
 				next(err);
+			}
+		})
+		.catch((err) => next(err));
+};
+
+exports.rsvp = (req, res, next) => {
+	let id = req.params.id;
+	let user = req.session.user;
+	let status = req.body.status;
+	Rsvp.findOneAndUpdate({ event: id, user: user }, { status: status }, { upsert: true })
+		.then((rsvp) => {
+			if (rsvp) {
+				req.flash("success", "RSVP completed");
+				res.redirect("/events/" + id);
+			} else {
+				req.flash('error', 'There was an issue with your RSVP')
 			}
 		})
 		.catch((err) => next(err));

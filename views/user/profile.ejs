@@ -2,7 +2,6 @@
 <div class="heading">
 	<h2>Welcome, [%= user.firstName + " " + user.lastName %]</h2>
 </div>
-[% if (events.length) { %]
 <table class="my-events">
 	<caption>
 		My Events
@@ -12,38 +11,53 @@
 		<th>Actions</th>
 	</thead>
 	<tbody>
-	[% events.forEach(event => { %]
+	[% if (events.length) { 
+			events.forEach(event => { %]
 	<tr>
 		<td>
 			<a href="/events/[%= event.id %]"><p>[%= event.title %]</p></a>
 		</td>
 		<td>
 				<div class="actions">
-					<form class="action">
-						<button
-							type="submit"
-							formmethod="GET"
-							formaction="/events/[%= event._id %]/edit"
-						>
-							<i class="fa-regular fa-pen-to-square fa-border fa-2xl green"></i>
-						</button>
-					</form>
-					<form class="action">
-						<button
-							type="submit"
-							formmethod="POST"
-							formaction="/events/[%= event._id %]?_method=DELETE"
-						>
-							<i class="fa-solid fa-trash-alt fa-border fa-2xl red"></i>
-						</button>
-					</form>
+					<div class="modify">
+						<form>
+							<button type = "submit" formmethod = "GET" formaction = "/events/[%= event._id %]/edit"><i class="fa-regular fa-pen-to-square fa-border fa-xl"></i></button>
+						</form>
+					</div>
+					<div class="remove">
+						<form>
+							<button type = "submit" formmethod = "POST" formaction = "/events/[%= event._id %]?_method=DELETE"><i class="fa-solid fa-trash-alt fa-border fa-xl"></i></button>
+						</form>
+					</div>
 				</div>
 		</td>
 	</tr>
-	[% }); %]
+	[% });
+	 } else { %]
+	<td colspan="2">You have not created any events</td>
+	[%} %]
 	</tbody>
 
 </table>
-[% } else { %]
-<h3>You have not created any events</h3>
-[% } %] [%- include('../partials/after') %]
+<table class="my-rsvps">
+	<caption>My RSVPs</caption>
+	<thead>
+		<th>Title</th>
+		<th>Going?</th>
+	</thead>
+	<tbody>
+	[% if (rsvps.length) { 
+			rsvps.forEach((rsvp) => { console.log(rsvp);%]
+		<tr>
+			<td>
+				<a href="/events/[%= rsvp.event._id %]"><p>[%= rsvp.event.title %]</p></a>
+			</td>
+			<td>[%= rsvp.status %]</td>
+		</tr>
+	[%	});
+	 } else { %] 
+		<td colspan="2">You have no RSVPs yet. Go get active!</td>
+	[% } %]
+	</tbody>
+	</table>
+[%- include('../partials/after') %]
