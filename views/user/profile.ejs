@@ -1,17 +1,49 @@
 [%- include('../partials/before.ejs') %]
 <div class="heading">
-  <h2>Welcome, [%= user.firstName + " " + user.lastName %]</h2>
+	<h2>Welcome, [%= user.firstName + " " + user.lastName %]</h2>
 </div>
 [% if (events.length) { %]
-    <p>You have created the following events:</p>
-    <ul>
-    [% events.forEach(event => { %]
-      <li>
-        <a href='/events/[%= event.id %]'><p>[%= event.title %]</p></a>
-      </li>
-    [% }); %]
-    </ul>
+<table class="my-events">
+	<caption>
+		My Events
+	</caption>
+	<thead>
+		<th>Title</th>
+		<th>Actions</th>
+	</thead>
+	<tbody>
+	[% events.forEach(event => { %]
+	<tr>
+		<td>
+			<a href="/events/[%= event.id %]"><p>[%= event.title %]</p></a>
+		</td>
+		<td>
+				<div class="actions">
+					<form class="action">
+						<button
+							type="submit"
+							formmethod="GET"
+							formaction="/events/[%= event._id %]/edit"
+						>
+							<i class="fa-regular fa-pen-to-square fa-border fa-2xl green"></i>
+						</button>
+					</form>
+					<form class="action">
+						<button
+							type="submit"
+							formmethod="POST"
+							formaction="/events/[%= event._id %]?_method=DELETE"
+						>
+							<i class="fa-solid fa-trash-alt fa-border fa-2xl red"></i>
+						</button>
+					</form>
+				</div>
+		</td>
+	</tr>
+	[% }); %]
+	</tbody>
+
+</table>
 [% } else { %]
-    <h3>You have not created any events</h3>
-[% } %]
-[%- include('../partials/after') %]
+<h3>You have not created any events</h3>
+[% } %] [%- include('../partials/after') %]

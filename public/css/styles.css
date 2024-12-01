@@ -75,6 +75,41 @@ img {
   display: flex;
 }
 
+caption {
+  text-align: left;
+  font-weight: bold;
+  font-size: 120%;
+}
+
+table {
+  background-color: var(--tertiary);
+  border-collapse: collapse;
+  border: 1px solid black;
+  margin: 20px;
+  box-shadow: 5px 5px 10px black;
+}
+
+th {
+  padding: 0.2em 1em 0.2em 0.5em;
+}
+
+th,
+td {
+  border: 1px solid black;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.action {
+  margin: 0.25rem;
+}
+
+.actions {
+  display: flex; /* Enable flexbox on the table cell */
+  align-items: center; /* Vertically align items in the center */
+  justify-content: space-between; /* Space forms evenly */
+}
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -88,7 +123,7 @@ li {
   background-color: var(--primary);
 }
 
-li a {
+li a, td a {
   display: block;
   color: black;
   text-align: center;
@@ -96,7 +131,7 @@ li a {
   text-decoration: none;
 }
 
-li a:hover {
+li a:hover, td a:hover {
   background-color: var(--active);
   color: white;
 }
@@ -265,3 +300,11 @@ button {
     font-size: inherit;
   }
 } 
+
+.fa-border {
+  border: none;
+}
+
+.fa-border:hover {
+  cursor: pointer;
+}
