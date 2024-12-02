@@ -171,6 +171,7 @@ exports.rsvp = (req, res, next) => {
 				res.redirect("/users/profile");
 			} else {
 				req.flash("error", "There was an issue with your RSVP");
+				res.redirect('/events/' + id)
 			}
 		})
 		.catch((err) => next(err));
