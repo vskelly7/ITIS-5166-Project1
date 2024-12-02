@@ -101,8 +101,8 @@ td {
   vertical-align: middle;
 }
 
-tr:first-child {
-  border-right: none;
+td:first-child:hover {
+  transform: scale(1.03, 1.1);
 }
 
 .actions {
@@ -254,9 +254,14 @@ select:focus {
   background-color: red;
 }
 
-.modify, .remove {
+.modify, .remove, .rsvp-button {
   margin: 5px;
   border-radius: 4px;
+  transition: all 0.5s ease;
+}
+
+.modify:hover, .remove:hover, .rsvp-button:hover {
+  transform: scale(.8, .8);
 }
 
 .rsvp-options {
