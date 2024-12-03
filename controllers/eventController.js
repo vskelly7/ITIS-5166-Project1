@@ -34,7 +34,6 @@ exports.create = (req, res, next) => {
 	event.host = req.session.user;
 	event.image = "/img/" + req.file.filename;
 	console.log(event);
-	
 	event
 		.save(event)
 		.then(res.redirect("/events"))
@@ -49,24 +48,11 @@ exports.create = (req, res, next) => {
 // GET /events/:id : send details of event identified by ID
 exports.show = (req, res, next) => {
 	let id = req.params.id;
-<<<<<<< HEAD
-	//an ObjectId is 24-bit Hex string
-	if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-		let err = new Error("Invalid event id");
-		err.status = 404;
-		return next(err);
-	}
-	model
-		.findById(id).populate('host', 'firstName lastName')
-		.lean()
-		.then((event) => {
-=======
 	Promise.all([
 		model.findById(id).populate("host", "firstName lastName").lean(),
 		Rsvp.countDocuments({ event: id, status: 'YES' }),
 	])
 		.then(([event, count]) => {
->>>>>>> upstream/main
 			if (event) {
 				let formatted = {
 					...event,
@@ -77,16 +63,11 @@ exports.show = (req, res, next) => {
 						DateTime.DATETIME_SHORT
 					),
 				};
-<<<<<<< HEAD
-				console.log(event);
-				return res.render("./events/event", { event: formatted, title: "event" });
-=======
 				res.render("./events/event", {
 					event: formatted,
 					title: "event",
 					rsvps: count,
 				});
->>>>>>> upstream/main
 			} else {
 				let err = new Error("Cannot find event with id " + id);
 				err.status = 404;
@@ -99,24 +80,6 @@ exports.show = (req, res, next) => {
 //GET /events/:id/edit : send html form for editing existing story
 exports.edit = (req, res, next) => {
 	let id = req.params.id;
-<<<<<<< HEAD
-	model.findById(id).lean()
-	.then((event) => {
-		let newEvent = {
-			...event,
-			start: DateTime.fromJSDate(new Date(event.start))
-				.toISO()
-				.slice(0, 19),
-			end: DateTime.fromJSDate(new Date(event.end)).toISO().slice(0, 19),
-		};
-		res.render("./events/edit", {
-			event: newEvent,
-			title: "event",
-			categories,
-		});
-	})
-	.catch((err) => next(err));
-=======
 	model
 		.findById(id)
 		.lean()
@@ -142,7 +105,6 @@ exports.edit = (req, res, next) => {
 			}
 		})
 		.catch((err) => next(err));
->>>>>>> upstream/main
 };
 
 // PUT /events/:id : update the story identified by id
@@ -158,10 +120,6 @@ exports.update = (req, res, next) => {
 			runValidators: true,
 		})
 		.then((event) => {
-<<<<<<< HEAD
-			deleteImage(event);
-			res.redirect("/events/" + id);
-=======
 			if (event) {
 				deleteImage(event);
 				req.flash("success", "Event successfully updated");
@@ -171,7 +129,6 @@ exports.update = (req, res, next) => {
 				err.status = 404;
 				next(err);
 			}
->>>>>>> upstream/main
 		})
 		.catch((err) => {
 			if (err.name === "ValidationError") err.status = 400;
@@ -186,10 +143,6 @@ exports.delete = (req, res, next) => {
 	model
 		.findByIdAndDelete(id, { useFindAndModify: false })
 		.then((event) => {
-<<<<<<< HEAD
-			deleteImage(event);
-			res.redirect("/events");
-=======
 			if (event) {
 				deleteImage(event);
 				req.flash("success", "Event successfully deleted");
@@ -199,7 +152,6 @@ exports.delete = (req, res, next) => {
 				err.status = 404;
 				next(err);
 			}
->>>>>>> upstream/main
 		})
 		.catch((err) => next(err));
 };
@@ -208,19 +160,29 @@ exports.rsvp = (req, res, next) => {
 	let id = req.params.id;
 	let user = req.session.user;
 	let status = req.body.status;
+	model.findById(id)
+		.then(event => {
+			if (event.host._id.toString() === user.toString()) {
+				let err = new Error("Hosts cannot RSVP to their own event.")
+				err.status = 401;
+				return next(err);
+			}
 	Rsvp.findOneAndUpdate(
 		{ event: id, user: user },
 		{ status: status },
-		{ upsert: true }
+		{ upsert: true, new: true }
 	)
 		.then((rsvp) => {
 			if (rsvp) {
-				req.flash("success", "RSVP completed");
+				req.flash("success", "RSVP completed succesfully");
 				res.redirect("/users/profile");
-			} else {
-				req.flash("error", "There was an issue with your RSVP");
-				res.redirect('/events/' + id)
-			}
+			} else {req.flash("error", "There was an issue with your RSVP.");
+				res.redirect("back")};
 		})
+		
+		.catch((err) => {
+			req.flash("error", "There was an issue with your RSVP");
+			next(err)});
+	})
 		.catch((err) => next(err));
 };

@@ -1,58 +1,52 @@
 [%- include('../partials/before') %]
 
 <div class="event">
-	<div class="title">
-		<h2>[%= event.title%]</h2>
-<<<<<<< HEAD
-		
-		[%if(user == event.host._id) {%]
-=======
-		[% if (user == event.host._id) { %]
->>>>>>> upstream/main
-		<div class="modify">
-			<form>
-				<button type = "submit" formmethod = "GET" formaction = "/events/[%= event._id %]/edit"><i class="fa-regular fa-pen-to-square fa-border fa-xl"></i></button>
-			</form>
-		</div>
-		<div class="remove">
-			<form>
-				<button type = "submit" formmethod = "POST" formaction = "/events/[%= event._id %]?_method=DELETE"><i class="fa-solid fa-trash-alt fa-border fa-xl"></i></button>
-			</form>
-		</div>
-<<<<<<< HEAD
-		[%}%]
-=======
+    <div class="title">
+        <h2>[%= event.title %]</h2>
 
-		[% } else { %]
+        [% if (user == event.host._id) { %]
+            <div class="modify">
+                <form>
+                    <button type="submit" formmethod="GET" formaction="/events/[%= event._id %]/edit">
+                        <i class="fa-regular fa-pen-to-square fa-border fa-xl"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="remove">
+                <form>
+                    <button type="submit" formmethod="POST" formaction="/events/[%= event._id %]?_method=DELETE">
+                        <i class="fa-solid fa-trash-alt fa-border fa-xl"></i>
+                    </button>
+                </form>
+            </div>
+        [% } %]
 
-			<div class="rsvp">
-				<button id="rsvp-button" class="rsvp-button">RSVP</button>
-				<div id="rsvp-options" class="rsvp-options hidden">
-					<form method="POST" action="/events/[%= event._id %]/rsvp">
-						<button type="submit" class="option-button" name="status" value="YES">YES</button>
-						<button type="submit" class="option-button" name="status" value="NO">NO</button>
-						<button type="submit" class="option-button" name="status" value="MAYBE">MAYBE</button>
-					</form>
-				</div>
-			</div>
-			
-		[% } %]
->>>>>>> upstream/main
-	</div>
+        <div class="rsvp">
+            <button id="rsvp-button" class="rsvp-button">RSVP</button>
+            <div id="rsvp-options" class="rsvp-options hidden">
+                <form method="POST" action="/events/[%= event._id %]/rsvp">
+                    <button type="submit" class="option-button" name="status" value="YES">YES</button>
+                    <button type="submit" class="option-button" name="status" value="NO">NO</button>
+                    <button type="submit" class="option-button" name="status" value="MAYBE">MAYBE</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-	<div class="image">
-		[% if(event.image && event.image.length > 0){ %]
-		<!--img src="/img/brewery.jpg" alt="Man in brewery" /-->
-		<img src="[%= typeof event.image !== 'undefined'? event.image: ''%]" alt="" srcset="" />
-		[% } %]
-	</div>
-	<div class="info">
-		<p><b>Host: </b>[%= event.host.firstName + ' ' + event.host.lastName%]</p>
-		<p><b>Start Date and Time: </b>[%= event.start %]</p>
-		<p><b>End Date and Time: </b>[%= event.end %]</p>
-		<p><b>Location: </b>[%= event.location%]</p>
-		<p><b>Details: </b>[%= event.details%]</p>
-		<p><b>Number of rsvps: </b>[%= rsvps %]</p>
-	</div>
+    <div class="image">
+        [% if(event.image && event.image.length > 0){ %]
+            <img src="[%= typeof event.image !== 'undefined'? event.image: '' %]" alt="Event Image" />
+        [% } %]
+    </div>
+
+    <div class="info">
+        <p><b>Host: </b>[%= event.host.firstName + ' ' + event.host.lastName %]</p>
+        <p><b>Start Date and Time: </b>[%= event.start %]</p>
+        <p><b>End Date and Time: </b>[%= event.end %]</p>
+        <p><b>Location: </b>[%= event.location %]</p>
+        <p><b>Details: </b>[%= event.details %]</p>
+        <p><b>Number of RSVPs: </b>[%= rsvps %]</p>
+    </div>
 </div>
+
 [%- include('../partials/after') %]
