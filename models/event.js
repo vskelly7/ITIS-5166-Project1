@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const Rsvp = require('./rsvp')
 
 const eventSchema = new Schema({
 	category: {
@@ -12,7 +13,13 @@ const eventSchema = new Schema({
 		required: [true, "Title is required"],
 	},
 	host: {
+<<<<<<< HEAD
 		type: Schema.Types.ObjectId, ref: 'User'},
+=======
+		type: Schema.Types.ObjectId,
+		ref: "User",
+	},
+>>>>>>> upstream/main
 	location: {
 		type: String,
 		required: [true, "Location is required"],
@@ -32,9 +39,18 @@ const eventSchema = new Schema({
 	},
 	image: {
 		type: String,
-		required: [true, 'Image is required'],
+		required: [true, "Image is required"],
 		unique: true,
 	},
+});
+
+eventSchema.pre("findOneAndDelete", function (next) { 
+	Rsvp.deleteMany({ event: this.getFilter()._id })
+		.then(res => {
+			console.log(res)
+			next()
+		})
+		.catch(err => next(err));
 });
 
 module.exports = mongoose.model("Event", eventSchema);

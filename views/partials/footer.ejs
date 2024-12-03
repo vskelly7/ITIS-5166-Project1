@@ -5,18 +5,10 @@
 <div>
 	<ul>
 		<li>
-		[% if (title === 'contact') { %]
-			<a href="/contact" class="active"> Contact </a>
-			[% } else { %]
-			<a href="/contact"> Contact </a>
-			[% } %]
+			<a href="/contact" class="[%= (title === 'contact') ? 'active' : '' %]"> Contact </a>
 		</li>
 		<li>
-			[% if (title === 'about') { %]
-				<a href="/about" class="active"> About </a>
-				[% } else { %]
-				<a href="/about"> About </a>
-				[% } %]
+				<a href="/about" class="[%= (title === 'about') ? 'active' : '' %]"> About </a>
 		</li>
 		<li>
 			<a href=""><i class="fa-brands fa-facebook"></i></a>

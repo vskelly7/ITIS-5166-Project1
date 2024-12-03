@@ -75,6 +75,42 @@ img {
   display: flex;
 }
 
+caption {
+  text-align: left;
+  font-weight: bold;
+  font-size: 120%;
+}
+
+table {
+  background-color: var(--tertiary);
+  border-collapse: collapse;
+  border: 1px solid black;
+  margin: 20px;
+  box-shadow: 5px 5px 10px black;
+}
+
+th {
+  padding: 0.2em 1em 0.2em 1em;
+}
+
+th,
+td {
+  border: 2px solid black;
+  border-style: groove;
+  text-align: center;
+  vertical-align: middle;
+}
+
+td:first-child:hover {
+  transform: scale(1.03, 1.1);
+}
+
+.actions {
+  display: flex; /* Enable flexbox on the table cell */
+  align-items: center; /* Vertically align items in the center */
+  justify-content: space-between; /* Space forms evenly */
+}
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -88,7 +124,7 @@ li {
   background-color: var(--primary);
 }
 
-li a {
+li a, td a {
   display: block;
   color: black;
   text-align: center;
@@ -96,7 +132,7 @@ li a {
   text-decoration: none;
 }
 
-li a:hover {
+li a:hover, td a:hover {
   background-color: var(--active);
   color: white;
 }
@@ -115,6 +151,7 @@ main {
   width: 87%;
   margin: 1rem auto;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   column-gap: 30px;
@@ -122,6 +159,11 @@ main {
 
 .content-wrapper li {
   background-color: var(--tertiary);
+}
+
+.heading {
+  flex-basis: 100%;
+  margin: 0 auto;
 }
 
 .words {
@@ -204,11 +246,49 @@ select:focus {
   column-gap: 10px;
 }
 
-.title .modify {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 10px;
+.modify {
+  background-color: green;
+}
+
+.remove {
+  background-color: red;
+}
+
+.modify, .remove, .rsvp-button {
+  margin: 5px;
+  border-radius: 4px;
+  transition: all 0.5s ease;
+}
+
+.modify:hover, .remove:hover, .rsvp-button:hover {
+  transform: scale(.8, .8);
+}
+
+.rsvp-options {
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+.rsvp-options .option-button {
+  display: block;
+  width: 100%;
+  margin: 5px 0;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.rsvp-button {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 .event h1 {
@@ -223,19 +303,14 @@ select:focus {
   grid-area: info;
 }
 
-.red {
-  color: red;
-}
-
-.green {
-  color: green;
-}
-
 button {
   background-color: inherit;
   border: none;
   height: 100%;
-  padding: 0;
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 4px;
+  box-shadow: 4px 6px 10px black;
 }
 
 @media screen and (min-width: 750px) {
@@ -259,3 +334,11 @@ button {
     font-size: inherit;
   }
 } 
+
+.fa-border {
+  border: none;
+}
+
+.fa-border:hover {
+  cursor: pointer;
+}

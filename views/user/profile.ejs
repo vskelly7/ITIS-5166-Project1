@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [%- include('../partials/before.ejs')%]
 <h2>Welcome, [%= user.firstName + " " + user.lastName%]</h2><br>
 [%if(events.length) {%]
@@ -10,3 +11,68 @@
 [%}%]
 </div>
 [%- include('../partials/after') %]
+=======
+[%- include('../partials/before.ejs') %]
+<div class="heading">
+	<h2>Welcome, [%= user.firstName + " " + user.lastName %]</h2>
+</div>
+<table class="my-events">
+	<caption>
+		My Events
+	</caption>
+	<thead>
+		<th>Title</th>
+		<th>Actions</th>
+	</thead>
+	<tbody>
+	[% if (events.length) { 
+			events.forEach(event => { %]
+	<tr>
+		<td>
+			<a href="/events/[%= event.id %]"><p>[%= event.title %]</p></a>
+		</td>
+		<td>
+				<div class="actions">
+					<div class="modify">
+						<form>
+							<button type = "submit" formmethod = "GET" formaction = "/events/[%= event._id %]/edit"><i class="fa-regular fa-pen-to-square fa-border fa-xl"></i></button>
+						</form>
+					</div>
+					<div class="remove">
+						<form>
+							<button type = "submit" formmethod = "POST" formaction = "/events/[%= event._id %]?_method=DELETE"><i class="fa-solid fa-trash-alt fa-border fa-xl"></i></button>
+						</form>
+					</div>
+				</div>
+		</td>
+	</tr>
+	[% });
+	 } else { %]
+	<td colspan="2">You have not created any events</td>
+	[%} %]
+	</tbody>
+
+</table>
+<table class="my-rsvps">
+	<caption>My RSVPs</caption>
+	<thead>
+		<th>Title</th>
+		<th>Going?</th>
+	</thead>
+	<tbody>
+	[% if (rsvps.length) { 
+			rsvps.forEach((rsvp) => { console.log(rsvp);%]
+		<tr>
+			<td>
+				<a href="/events/[%= rsvp.event._id %]"><p>[%= rsvp.event.title %]</p></a>
+			</td>
+			<td>[%= rsvp.status %]</td>
+		</tr>
+	[%	});
+	 } else { %] 
+		<td colspan="2">You have no RSVPs yet. Go get active!</td>
+	[% } %]
+	</tbody>
+	</table>
+[%- include('../partials/after') %]
+>>>>>>> upstream/main

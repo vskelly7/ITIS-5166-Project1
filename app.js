@@ -29,7 +29,7 @@ mongoose
 	.then(() => {
 		//start the server
 		app.listen(port, host, () => {
-			console.log("Server is running on port", port);
+			console.log(`Server is running at http://${host}:${port}`);
 		});
 	})
 	.catch((err) => console.log(err.message));
@@ -60,7 +60,8 @@ app.use((req, res, next) => {
 	console.log(req.session);
 	res.locals.successMessages = req.flash("success");
 	res.locals.errorMessages = req.flash("error");
-	res.locals.user = req.session.user ? true : false;
+	res.locals.user = req.session.user || null;
+	res.locals.name = req.session.name || null;
 	next();
 });
 

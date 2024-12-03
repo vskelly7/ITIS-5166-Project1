@@ -1,5 +1,9 @@
 const User = require('../models/user');
 const Event = require('../models/event');
+<<<<<<< HEAD
+=======
+const Rsvp = require('../models/rsvp')
+>>>>>>> upstream/main
 
 //get the new user form
 exports.new = (req, res)=> {
@@ -44,6 +48,7 @@ exports.processLogin = (req, res)=>{
                 .then(result=>{
                     if(result) {
                         req.session.user = user._id;  //store user id in session
+                        req.session.name = user.firstName;
                         req.flash('success', 'You have successfully logged in.');
                         res.redirect('/users/profile', );
                     } else {
@@ -64,10 +69,16 @@ exports.processLogin = (req, res)=>{
 //get profile
 exports.profile = (req, res, next)=>{
     let id = req.session.user;
+<<<<<<< HEAD
     Promise.all([User.findById(id), Event.find({host: id})])
     .then(results=>{
         const [user, events] = results;
         res.render('user/profile', {title: 'profile', user, events});
+=======
+    Promise.all([User.findById(id), Event.find({host: id}), Rsvp.find({user: id}).populate('event', 'title')])
+        .then(([user, events, rsvps]) => {
+        res.render('user/profile', {title: 'profile', user, events, rsvps});
+>>>>>>> upstream/main
 })
     .catch(err=>next(err));
 };
